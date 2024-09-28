@@ -11,6 +11,23 @@ const app = new Hono<{
 	}
 }>();
 
+
+
+app.use('/api/v1/blog/*',async(c,next)=> {
+  const header = c.req.header("authorization") || ""
+  const token = header.split(" ")[1]
+  const value  = await verify(token,c.env.JWT_SECRET)
+  if(value.id){ 
+    await next() 
+  }
+  else{
+  c.status(403)
+   return c.json({
+    msg : "invalid token"
+  })
+}
+})
+
 app.get('/', (c) => {
   return c.text('Hello Hono!')
 })
@@ -40,15 +57,38 @@ const response = await prisma.user.create({
     id : true
   }
 })
-  const token = sign({id : response.id },c.env.JWT_SECRET)
+  const token = await sign({id : response.id },c.env.JWT_SECRET)
   return c.json({
     jwt : token
   })
 })
 
 
-app.post('/api/v1/user/signin', (c) => {
-  return c.text('signin route')
+app.post('/api/v1/user/signin', async(c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate())
+
+const body = await c.req.json()
+
+const user = await prisma.user.findFirst({
+  where : {
+    email : body.email,
+    password : body.password
+  },
+  select : {
+    id  : true
+  }
+})
+if(!user?.id){
+  return c.json({
+    msg  : "user not found, try signing up!"
+  })
+}
+  const jwt = await sign({id : user.id},c.env.JWT_SECRET)
+  return c.json({
+    jwt : jwt
+  })
 })
 
 
