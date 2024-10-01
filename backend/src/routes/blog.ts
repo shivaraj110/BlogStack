@@ -45,7 +45,7 @@ blogRouter.post('/', async(c) => {
                     title : body.title,
                     content : body.content,
                     authorId : Number(c.get("authorId")),
-                    publishDate : `${new Date().getDate() + " "}  ${new Date().getMonth() + " "} ${new Date().getFullYear()} `
+                    publishDate : new Date().getDate() +" " +  new Date().getMonth() + " " + new Date().getFullYear()
                 }
             })
             return c.json({
