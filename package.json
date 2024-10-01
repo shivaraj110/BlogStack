@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@shivaraj0110/medium-common": "^1.0.5",
+    "lucide-react": "^0.446.0",
+    "react-router-dom": "^6.26.2"
+  }
 }
