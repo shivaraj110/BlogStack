@@ -105,7 +105,18 @@ return c.json({
       }).$extends(withAccelerate())
   
       try{
-          const blogs = await prisma.post.findMany()
+          const blogs = await prisma.post.findMany({
+            select: {
+                title : true,
+                content : true,
+                publishDate : true,
+                author :{
+                    select : {
+                        name : true
+                    }
+                }
+            }
+          })
           return c.json({
               blogs : blogs
           })

@@ -10,7 +10,7 @@ interface BlogData {
 function Blogs(data: BlogData) {
   const [bookmarked, setBookMarked] = useState(false);
   return (
-    <>
+    <div>
       <div className="flex mt-6 justify-start md:ml-32 transi ml-12 min-w-[550px] pt-2">
         <div className=" bg-blue-500 text-white text-xl flex poppins-regular justify-center h-8 rounded-full w-8 text-center font-extralight">
           {data.authorName[0]}
@@ -100,7 +100,7 @@ function Blogs(data: BlogData) {
         </div>
       </div>
       <div className="h-[0.5px] mt-10  md:ml-32 ml-12 md:mr-32 transi mr-12 bg-gray-300"></div>
-    </>
+    </div>
   );
 }
 

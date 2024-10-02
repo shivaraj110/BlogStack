@@ -11,7 +11,7 @@ function Landing() {
     },
     {
       id: "2",
-      title: "Mastering Remix",
+      title: "Mastering Remix - Break out of the crowd",
       excerpt: "Advanced techniques to level up your Remix skills...",
       date: "2023-09-10",
       author: "Bob Smith",
@@ -30,19 +30,19 @@ function Landing() {
       {" "}
       <header className="border-b">
         {" "}
-        <div className="container mx-auto px-4 py-4">
+        <div className="container mx-auto transi px-4 py-4">
           {" "}
           <div className="flex flex-col sm:flex-row justify-between items-center">
             {" "}
             <Link
               to="/"
-              className="text-2xl font-bold text-blue-600 mb-4 sm:mb-0">
+              className="text-2xl font-bold poppins-semibold text-blue-600 mb-4 sm:mb-0">
               {" "}
               BlogStack{" "}
             </Link>{" "}
             <nav>
               {" "}
-              <ul className="flex flex-wrap justify-center sm:justify-end space-x-4">
+              <ul className="flex flex-wrap justify-center poppins-regular sm:justify-end space-x-4">
                 {" "}
                 <li>
                   {" "}
@@ -87,7 +87,7 @@ function Landing() {
       </header>{" "}
       <main className="flex-grow">
         {" "}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20">
+        <section className="bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular text-white py-20">
           {" "}
           <div className="container mx-auto px-4 text-center">
             {" "}
@@ -107,7 +107,7 @@ function Landing() {
             </Link>{" "}
           </div>{" "}
         </section>{" "}
-        <section className="py-16 bg-gray-100">
+        <section className="py-16 poppins-light bg-gray-100">
           {" "}
           <div className="container mx-auto px-4">
             {" "}
@@ -159,7 +159,7 @@ function Landing() {
             </div>{" "}
           </div>{" "}
         </section>{" "}
-        <section className="py-16">
+        <section className="py-16  poppins-light">
           {" "}
           <div className="container mx-auto px-4">
             {" "}
@@ -204,9 +204,9 @@ function Landing() {
           to={`/posts`}
           className="px-4 py-2 bg-blue-600 text-white rounded max-w-32 mx-auto text-center  mb-8 flex flex-col hover:bg-blue-700 transition-colors">
           {" "}
-          more posts{" "}
+          More posts{" "}
         </Link>{" "}
-        <section className="py-16 bg-gray-100">
+        <section className="py-16 poppins-light bg-gray-100">
           {" "}
           <div className="container mx-auto px-4 text-center">
             {" "}
@@ -236,7 +236,7 @@ function Landing() {
           </div>{" "}
         </section>{" "}
       </main>{" "}
-      <footer className="bg-blue-600 text-white py-8">
+      <footer className="bg-blue-600 text-white poppins-light py-8">
         {" "}
         <div className="container mx-auto px-4">
           {" "}
