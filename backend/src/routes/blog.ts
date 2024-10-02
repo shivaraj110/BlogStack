@@ -110,6 +110,7 @@ return c.json({
                 title : true,
                 content : true,
                 publishDate : true,
+                id : true,
                 author :{
                     select : {
                         name : true
@@ -130,6 +131,41 @@ return c.json({
   
   })
   
+  blogRouter.get('/', async(c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+
+    try{
+        const blogs = await prisma.post.findMany({
+            where : {
+                authorId : Number(c.get("authorId"))
+            },
+          select: {
+              title : true,
+              content : true,
+              publishDate : true,
+              id : true,
+              author :{
+                  select : {
+                      name : true
+                  }
+              }
+          }
+        })
+        return c.json({
+            blogs : blogs
+        })
+    }
+    catch(e){
+        c.status(400);
+       return c.json({
+            message : " error while fetching blog posts! "
+        })
+    }
+
+})
+
 blogRouter.get('/:id', async (c) => {
     const id = c.req.param('id')
     const prisma = new PrismaClient({
@@ -139,6 +175,17 @@ blogRouter.get('/:id', async (c) => {
         where : {
            id : Number(id)
         },
+        select: {
+            title : true,
+            content : true,
+            publishDate : true,
+            id : true,
+            author :{
+                select : {
+                    name : true
+                }
+            }
+        }
     })
     return c.json({
         blog
@@ -151,6 +198,9 @@ blogRouter.get('/:id', async (c) => {
     }
   })
   
+
+
+
 blogRouter.delete('/',async(c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,

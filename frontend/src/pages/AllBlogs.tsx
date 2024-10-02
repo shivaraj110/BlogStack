@@ -1,55 +1,42 @@
-import { useEffect, useState } from "react";
 import Blogs from "../components/Blogs";
 import Appbar from "../components/Appbar";
-import axios from "axios";
 import { useBlogs } from "../hooks/useBlogs";
-
-interface BlogData {
-  title: string;
-  content: string;
-  publishDate: string;
-  authorName: string;
-}
+import ResponsiveBlogLoadingSkeleton from "../components/ResponsiveBlogLoadingSkeleton";
 
 function AllBlogs() {
   const { loading, blogs } = useBlogs();
-  return (
-    <div>
+  if (loading) {
+    return (
       <div className="">
         <Appbar />
+        <div className="flex flex-col">
+          <div className="">
+            <ResponsiveBlogLoadingSkeleton />;
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col">
-        <Blogs
-          authorName="shivaraj"
-          title="this is the title for this blog asssda sdadada dadafsomfs"
-          content=" this is content of this blog this is content of this blogthis is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog!"
-          publishDate="2 aug,2024"
-          context="docker"
-        />
-        <Blogs
-          authorName="shivaraj"
-          title="this is the title for this blog asssda sdadada dadafsomfs"
-          content=" this is content of this blog this is content of this blogthis is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog!"
-          publishDate="2 aug,2024"
-          context="docker"
-        />
-        <Blogs
-          authorName="shivaraj"
-          title="this is the title for this blog asssda sdadada dadafsomfs"
-          content=" this is content of this blog this is content of this blogthis is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog!"
-          publishDate="2 aug,2024"
-          context="docker"
-        />
-        <Blogs
-          authorName="shivaraj"
-          title="this is the title for this blog asssda sdadada dadafsomfs"
-          content=" this is content of this blog this is content of this blogthis is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog this is content of this blog!"
-          publishDate="2 aug,2024"
-          context="docker"
-        />
+    );
+  } else {
+    return (
+      <div className=" p-1">
+        <Appbar />
+        <div className="flex flex-col">
+          <div className="mt-24">
+            {blogs.map((b) => (
+              <Blogs
+                authorName={b.author.name || "Anonymous"}
+                title={b.title}
+                content={b.content}
+                context="Docker"
+                publishDate="2nd May,  2032"
+                id={b.id}
+              />
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default AllBlogs;

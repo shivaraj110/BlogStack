@@ -3,6 +3,7 @@ import Quote from "../components/Quote";
 import { SigninInput } from "@shivaraj0110/medium-common";
 import { useState } from "react";
 import axios from "axios";
+import { backnedUrl } from "../config/url";
 function Login() {
   const [pressed, setPressed] = useState(false);
   const [signinPayload, setSigninPayload] = useState<SigninInput>({
@@ -15,7 +16,7 @@ function Login() {
     try {
       setPressed(true);
       const res = await axios.post(
-        "https://backend.shivarajchandaragi9.workers.dev/api/v1/user/signin",
+        `${backnedUrl}/api/v1/user/signin`,
         signinPayload,
         {
           headers: {

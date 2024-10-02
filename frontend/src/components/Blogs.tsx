@@ -1,27 +1,29 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-interface BlogData {
+export interface BlogData {
   authorName: string;
   title: string;
   content: string;
   publishDate: string;
   context: string;
+  id: number;
 }
 function Blogs(data: BlogData) {
   const [bookmarked, setBookMarked] = useState(false);
   return (
     <div>
-      <div className="flex mt-6 justify-start md:ml-32 transi ml-12 min-w-[550px] pt-2">
-        <div className=" bg-blue-500 text-white text-xl flex poppins-regular justify-center h-8 rounded-full w-8 text-center font-extralight">
-          {data.authorName[0]}
+      <div className="flex mt-6 flex-row justify-start md:ml-32 transi ml-12 min-w-[550px] pt-2">
+        <div className=" bg-blue-500 text-white text-xl flex flex-col poppins-regular justify-center h-8 rounded-full w-8 text-center font-extralight">
+          {data.authorName[0].toUpperCase()}
         </div>
-        <div className="pl-2 poppins-light">{data.authorName}</div>
-        <div className="pl-2 poppins-light text-gray-500">
+        <div className="pl-2 poppins-light translate-y-1 ">{data.authorName}</div>
+        <div className="pl-2 poppins-light translate-y-1  text-gray-500">
           {data.publishDate}
         </div>
       </div>
       <div className="text-2xl flex justify-start mt-1  poppins-semibold md:ml-32 ml-12 md:mr-32 transi mr-12 ">
-        {data.title}
+        <Link to={`/blog/${data.id}`}>{data.title}</Link>
       </div>
       <div className="text-lg flex justify-start mt-1  md:ml-32 ml-12 md:mr-32 transi mr-12 poppins-light ">
         {data.content.slice(0, 200) + "..."}
