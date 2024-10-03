@@ -1,7 +1,6 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Appbar() {
-  const nav = useNavigate()
   return (
     <div className="fixed z-40 selection w-full ">
       <header className="flex z-20 justify-between p-4 mt-3 items-center bg-blue-50 shadow-md rounded-3xl box-border mx-12 transi md:mx-32">
@@ -10,6 +9,7 @@ function Appbar() {
         </div>
         <div className="flex flex-row">
           <div className=" flex mr-4 items-center hover:text-blue-500 hover:cursor-pointer">
+            <Link to={'/WriteBlog'}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -23,6 +23,7 @@ function Appbar() {
                 d="M12 4.5v15m7.5-7.5h-15"
               />
             </svg>
+            </Link>
           </div>
           <div className=" bg-blue-500 text-white text-lg flex flex-col cursor-pointer poppins-regular self-center justify-center h-[30px] rounded-full w-[30px] text-center font-extralight">
             {"Shivaraj"[0]}

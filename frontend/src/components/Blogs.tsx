@@ -6,7 +6,7 @@ export interface BlogData {
   title: string;
   content: string;
   publishDate: string;
-  context: string;
+  tags: string[];
   id: number;
 }
 function Blogs(data: BlogData) {
@@ -17,7 +17,9 @@ function Blogs(data: BlogData) {
         <div className=" bg-blue-500 text-white text-xl flex flex-col poppins-regular justify-center h-8 rounded-full w-8 text-center font-extralight">
           {data.authorName[0].toUpperCase()}
         </div>
-        <div className="pl-2 poppins-light translate-y-1 ">{data.authorName}</div>
+        <div className="pl-2 poppins-light translate-y-1 ">
+          {data.authorName}
+        </div>
         <div className="pl-2 poppins-light translate-y-1  text-gray-500">
           {data.publishDate}
         </div>
@@ -28,12 +30,21 @@ function Blogs(data: BlogData) {
       <div className="text-lg flex justify-start mt-1  md:ml-32 ml-12 md:mr-32 transi mr-12 poppins-light ">
         {data.content.slice(0, 200) + "..."}
       </div>
-      <div className="flex flex-row">
-        <div className="rounded-3xl w-fit p-1 flex justify-start mt-10  md:ml-32 ml-12 transi bg-gray-200 text-gray-800 poppins-extralight">
-          {data.context}
-        </div>
-        <div className="mt-11 ml-4 text-gray-500">
-          {Math.ceil(data.content.length / 100)} {"min read"}
+
+      <div className="flex flex-row ">
+        <div className="w-fit p-1 flex flex-row mt-10  md:ml-28 ml-12 transi poppins-extralight">
+          {data.tags[0] !== "notags"
+            ? data.tags.map((t) => (
+                <div
+                  key={data.id}
+                  className="rounded-3xl w-fit p-1 flex justify-start h-fit ml-4 transi bg-gray-200 text-gray-800 poppins-extralight">
+                  {t}
+                </div>
+              ))
+            : null}
+          <div className=" translate-y-1 ml-4 text-gray-500">
+            {Math.ceil(data.content.length / 100)} {"min read"}
+          </div>
         </div>
         <div
           className="flex ml-auto text-gray-500 mr-6 pt-11 hover:cursor-pointer "
@@ -101,7 +112,7 @@ function Blogs(data: BlogData) {
           </svg>
         </div>
       </div>
-      <div className="h-[0.5px] mt-10  md:ml-32 ml-12 md:mr-32 transi mr-12 bg-gray-300"></div>
+      <div className="h-[0.5px] mt-10 important md:ml-32 ml-12 md:mr-32 transi mr-12 bg-gray-300"></div>
     </div>
   );
 }

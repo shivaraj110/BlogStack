@@ -27,7 +27,7 @@ function AllBlogs() {
                 authorName={b.author.name || "Anonymous"}
                 title={b.title}
                 content={b.content}
-                context="Docker"
+                tags={!b.tags ? ["notags"] : b.tags}
                 publishDate="2nd May,  2032"
                 id={b.id}
               />

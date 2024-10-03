@@ -27,7 +27,7 @@ function FullBlog() {
           <div className="mt-10">
             <Blog
               authorName={`${blog?.author.name || "Anonymous"}`}
-              context={`${"Docker"}`}
+              tags={["Docker", "kubernaties"]}
               id={Number(id)}
               title={`${blog?.title}`}
               content={`${blog?.content}`}
@@ -39,5 +39,4 @@ function FullBlog() {
     );
   }
 }
-
 export default FullBlog;

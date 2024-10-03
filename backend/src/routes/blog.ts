@@ -3,6 +3,7 @@ import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode,jwt,sign,verify } from 'hono/jwt';
 import { createBlogPost, CreateBlogPost, updateBlogPost, UpdateBlogPost } from "@shivaraj0110/medium-common";
+import { Turtle } from "lucide-react";
 
 export const blogRouter = new Hono<{
 	Bindings: {
@@ -45,6 +46,7 @@ blogRouter.post('/', async(c) => {
                     title : body.title,
                     content : body.content,
                     authorId : Number(c.get("authorId")),
+                    tags : body.tags
                 }
             })
             return c.json({
@@ -111,6 +113,7 @@ return c.json({
                 content : true,
                 publishDate : true,
                 id : true,
+                tags : true,
                 author :{
                     select : {
                         name : true
@@ -146,6 +149,7 @@ return c.json({
               content : true,
               publishDate : true,
               id : true,
+              tags : true,
               author :{
                   select : {
                       name : true
@@ -180,6 +184,7 @@ blogRouter.get('/:id', async (c) => {
             content : true,
             publishDate : true,
             id : true,
+            tags : true,
             author :{
                 select : {
                     name : true
