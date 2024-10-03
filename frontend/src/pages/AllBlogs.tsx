@@ -28,7 +28,7 @@ function AllBlogs() {
                 title={b.title}
                 content={b.content}
                 tags={!b.tags ? ["notags"] : b.tags}
-                publishDate="2nd May,  2032"
+                publishDate={b.publishDate ? b.publishDate : "no trace"}
                 id={b.id}
               />
             ))}

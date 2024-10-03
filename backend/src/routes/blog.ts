@@ -3,7 +3,6 @@ import { Prisma, PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode,jwt,sign,verify } from 'hono/jwt';
 import { createBlogPost, CreateBlogPost, updateBlogPost, UpdateBlogPost } from "@shivaraj0110/medium-common";
-import { Turtle } from "lucide-react";
 
 export const blogRouter = new Hono<{
 	Bindings: {
@@ -37,6 +36,12 @@ blogRouter.post('/', async(c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
+    const date = new Date().getDate().toString()
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const d = new Date();
+    const month = months[d.getMonth()];
+    const year = d.getFullYear()
+    const suffix = date[date.length -1 ] === "1" ? "st " : date[date.length -1 ] === "2" ? "nd " : date[date.length -1 ] === "3" ? "rd " : date[date.length -1 ] in ["4","5","6","7","8","9","10"] ? "th " : null
     try{
 
         const {success} = createBlogPost.safeParse(body)
@@ -46,7 +51,8 @@ blogRouter.post('/', async(c) => {
                     title : body.title,
                     content : body.content,
                     authorId : Number(c.get("authorId")),
-                    tags : body.tags
+                    tags : body.tags,
+                    publishDate : date + suffix + month + ", " + year
                 }
             })
             return c.json({

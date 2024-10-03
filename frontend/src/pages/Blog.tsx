@@ -6,7 +6,7 @@ export function Blog(data: BlogData) {
       <div className=" mt-28 flex flex-col md:col-span-3 col-span-5">
         <div className="poppins-bold text-4xl ">{data.title}</div>
         <div className="text-xl text-gray-600 self- mt-4 poppins-light">
-          Posted on {data.publishDate}
+          Published on {data.publishDate}
         </div>
         <div className="text-lg mt-6 mb-6">{data.content}</div>
       </div>

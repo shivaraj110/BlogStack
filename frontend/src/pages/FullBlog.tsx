@@ -31,7 +31,7 @@ function FullBlog() {
               id={Number(id)}
               title={`${blog?.title}`}
               content={`${blog?.content}`}
-              publishDate={"may 23, 2069"}
+              publishDate={blog?.publishDate ? blog.publishDate : "no trace"}
             />
           </div>
         </div>
