@@ -176,6 +176,32 @@ return c.json({
 
 })
 
+
+
+
+blogRouter.get("/bookmarks",async (c) => {
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+    try{
+        const res = await prisma.userSpecific.findMany({
+            where : {
+                userId : Number(c.get("authorId"))
+            }
+        })
+        return c.json({
+            bookMarkedBlogs : res
+        })
+    }
+    catch(e){
+        c.status(411)
+        return c.json({
+            msg : "error while fetching the bookmarks!"
+        })
+    }
+})
+
+
 blogRouter.get('/:id', async (c) => {
     const id = c.req.param('id')
     const prisma = new PrismaClient({
@@ -243,6 +269,30 @@ blogRouter.put('/publish',async(c)=>{
         c.status(411)
        return c.json({
             msg : "error while publishing the blog!"
+        })
+    }
+})
+blogRouter.post('/bookmark',async (c) => {
+    const body = await c.req.json()
+    const prisma = new PrismaClient({
+        datasourceUrl: c.env.DATABASE_URL,
+    }).$extends(withAccelerate())
+    try{
+         await prisma.userSpecific.create({
+            data : {
+                bookMarkedBlogId : body.id,
+                userId : Number(c.get("authorId"))
+            }
+        })
+        return c.json({
+                msg : "bookmarked the blog"
+            })
+        
+    }
+    catch(e){
+        c.status(411)
+        return c.json({
+            msg : "error adding the bookmark"
         })
     }
 })

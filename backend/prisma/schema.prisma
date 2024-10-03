@@ -14,11 +14,12 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  email    String  @unique
-  name     String?
-  password String
-  posts    Post[]
+  id           Int            @id @default(autoincrement())
+  email        String         @unique
+  name         String?
+  password     String
+  posts        Post[]
+  userSpecific userSpecific[]
 }
 
 model Post {
@@ -30,4 +31,11 @@ model Post {
   authorId    Int
   publishDate String?
   tags        String[]
+}
+
+model userSpecific {
+  user             User  @relation(fields: [userId], references: [id])
+  userId           Int   @unique
+  bookMarkedBlogId Int[]
+  forgottenBlogid  Int[]
 }

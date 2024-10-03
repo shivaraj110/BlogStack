@@ -11,6 +11,7 @@ export interface BlogData {
 }
 function Blogs(data: BlogData) {
   const [bookmarked, setBookMarked] = useState(false);
+  const [forgotten, setForgotten] = useState(false);
   return (
     <div>
       <div className="flex mt-6 flex-row justify-start md:ml-32 transi ml-12 min-w-[550px] pt-2">
@@ -35,9 +36,7 @@ function Blogs(data: BlogData) {
         <div className="w-fit p-1 flex flex-row mt-10  md:ml-28 ml-12 transi poppins-extralight">
           {data.tags[0] !== "notags"
             ? data.tags.map((t) => (
-                <div
-                  key={data.id}
-                  className="rounded-3xl w-fit p-1 flex justify-start h-fit ml-4 transi bg-gray-200 text-gray-800 poppins-extralight">
+                <div className="rounded-3xl w-fit p-1 flex justify-start h-fit ml-4 transi bg-gray-200 text-gray-800 poppins-extralight">
                   {t}
                 </div>
               ))
@@ -58,7 +57,7 @@ function Blogs(data: BlogData) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6">
+              className="size-6 ">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -72,7 +71,7 @@ function Blogs(data: BlogData) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6">
+              className="size-6 text-blue-600">
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -81,20 +80,40 @@ function Blogs(data: BlogData) {
             </svg>
           )}
         </div>
-        <div className="flex mr-6 text-gray-500 pt-11 hover:cursor-pointer">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-6">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-            />
-          </svg>
+        <div
+          onClick={() => {
+            setForgotten(!forgotten);
+          }}
+          className="flex mr-6 text-gray-500 pt-11 hover:cursor-pointer">
+          {forgotten ? (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6 text-red-600">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+          ) : (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="size-6">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+          )}
         </div>
         <div className="flex mr-12 md:mr-36 text-gray-500 pt-11 hover:cursor-pointer">
           <svg

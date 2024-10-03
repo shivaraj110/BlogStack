@@ -27,7 +27,7 @@ function FullBlog() {
           <div className="mt-10">
             <Blog
               authorName={`${blog?.author.name || "Anonymous"}`}
-              tags={["Docker", "kubernaties"]}
+              tags={blog?.tags || [""]}
               id={Number(id)}
               title={`${blog?.title}`}
               content={`${blog?.content}`}

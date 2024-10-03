@@ -36,10 +36,10 @@ export function WriteBlog() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 poppins-extralight">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-4">Write Your Blog</h2>
+          <h2 className="text-2xl poppins-semibold mb-4">Write Your Blog</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
@@ -91,7 +91,7 @@ export function WriteBlog() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
+              className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 font-medium focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
               {isSubmitting
                 ? "Publishing..."
                 : published
@@ -102,9 +102,9 @@ export function WriteBlog() {
         </div>
 
         <div className="bg-white shadow-md rounded-lg p-6">
-          <h2 className="text-2xl font-bold mb-4">Preview</h2>
+          <h2 className="text-2xl poppins-semibold mb-4">Preview</h2>
           <div className="prose max-w-none">
-            <h1 className="text-3xl font-bold mb-4">
+            <h1 className="text-3xl font-semibold mb-4">
               {title || "Your Blog Title"}
             </h1>
             <div className="whitespace-pre-wrap">

@@ -100,7 +100,7 @@ function Landing() {
               presence with our powerful blogging platform.{" "}
             </p>{" "}
             <Link
-              to="/get-started"
+              to="/signup"
               className="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
               {" "}
               Get Started{" "}
@@ -188,7 +188,7 @@ function Landing() {
                         <p>{post.author}</p> <p>{post.date}</p>{" "}
                       </div>{" "}
                       <Link
-                        to={`/posts/${post.id}`}
+                        to={`/blog/${Number(post.id + 5)}`}
                         className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
                         {" "}
                         Read More{" "}
@@ -201,7 +201,7 @@ function Landing() {
           </div>{" "}
         </section>{" "}
         <Link
-          to={`/posts`}
+          to={`/blogs`}
           className="px-4 py-2 bg-blue-600 text-white rounded max-w-32 mx-auto text-center  mb-8 flex flex-col hover:bg-blue-700 transition-colors">
           {" "}
           More posts{" "}
