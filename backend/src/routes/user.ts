@@ -8,9 +8,28 @@ export const userRouter = new Hono<{
 	Bindings: {
 		DATABASE_URL: string,
     JWT_SECRET:string
-	}
+	},
+  Variables:{
+    userId : string
+}
 }>();
 
+
+const verifyUser = async(c : any,next : any)=> {
+  const header = c.req.header("authorization") || ""
+  const token = header.split(" ")[1]
+  const value  = await verify(token,c.env.JWT_SECRET)
+  if(value.id){ 
+      c.set("userId",String(value.id))
+      await next() 
+  }
+  else{
+  c.status(403)
+   return c.json({
+    msg : " you are not logged in! "
+  })
+}
+}
 
 userRouter.post('/signup',async (c) => {
     const prisma = new PrismaClient({
@@ -115,4 +134,23 @@ userRouter.post('/signup',async (c) => {
     return c.json({
         msg : "deleted all the users"
     })
+})
+userRouter.get("/details",verifyUser,async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate())
+const res = await prisma.user.findFirst({
+  where : {
+    id : Number(c.get("userId"))
+  }
+  ,
+  select : {
+    name : true,
+    email : true,
+    id : true
+  }
+})
+return c.json({
+  details : res
+})
 })

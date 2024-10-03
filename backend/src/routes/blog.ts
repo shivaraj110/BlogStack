@@ -187,6 +187,9 @@ blogRouter.get("/bookmarks",async (c) => {
         const res = await prisma.userSpecific.findMany({
             where : {
                 userId : Number(c.get("authorId"))
+            },
+            select : {
+                bookMarkedBlogId : true
             }
         })
         return c.json({
@@ -280,7 +283,7 @@ blogRouter.post('/bookmark',async (c) => {
     try{
          await prisma.userSpecific.create({
             data : {
-                bookMarkedBlogId : body.id,
+                bookMarkedBlogId : [body.id],
                 userId : Number(c.get("authorId"))
             }
         })
