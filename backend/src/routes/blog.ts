@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { Prisma, PrismaClient } from '@prisma/client/edge'
+import { Prisma, PrismaClient, userSpecific } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode,jwt,sign,verify } from 'hono/jwt';
 import { createBlogPost, CreateBlogPost, updateBlogPost, UpdateBlogPost } from "@shivaraj0110/medium-common";
@@ -280,17 +280,51 @@ blogRouter.post('/bookmark',async (c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())
+    const id  = Number(body.id)
     try{
-         await prisma.userSpecific.create({
+        const existingBookMarks = await prisma.userSpecific.findFirst({
+            where : {
+                userId : Number(c.get("authorId"))
+            },
+            select : {
+                bookMarkedBlogId : true
+            }    
+        })
+        // @ts-ignore
+        
+        const index = (length(existingBookMarks)-1)
+        //@ts-ignore
+        if(existingBookMarks){
+            //@ts-ignore
+            const bookMarkedBlogId = existingBookMarks[index]
+            await prisma.userSpecific.update({
+                where : {
+                    userId : Number(c.get("authorId"))
+                },
+                data : {
+                    bookMarkedBlogId : [...bookMarkedBlogId,id]
+                }
+            })
+        c.json({
+            msg : "bookmark updated"
+        })  
+        }
+
+        else{
+                    const resp =  await prisma.userSpecific.create({
             data : {
                 bookMarkedBlogId : [body.id],
                 userId : Number(c.get("authorId"))
+            },
+            select : {
+                bookMarkedBlogId : true
             }
         })
         return c.json({
-                msg : "bookmarked the blog"
+                resp,
+                msg : "bookmarked the blog",
             })
-        
+        }
     }
     catch(e){
         c.status(411)

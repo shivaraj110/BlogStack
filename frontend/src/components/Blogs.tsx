@@ -12,6 +12,9 @@ export interface BlogData {
 function Blogs(data: BlogData) {
   const [bookmarked, setBookMarked] = useState(false);
   const [forgotten, setForgotten] = useState(false);
+  const handleBookmark = async () => {
+    
+  }
   return (
     <div>
       <div className="flex mt-6 flex-row justify-start md:ml-32 transi ml-12 min-w-[550px] pt-2">

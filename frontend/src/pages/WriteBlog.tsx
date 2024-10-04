@@ -3,6 +3,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { backnedUrl } from "../config/url";
+import { useNavigate } from "react-router-dom";
 
 export function WriteBlog() {
   const [title, setTitle] = useState("");
@@ -10,6 +11,7 @@ export function WriteBlog() {
   const [tags, setTags] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [published, setPublished] = useState(false);
+  const nav = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,6 +35,9 @@ export function WriteBlog() {
     res.data ? setPublished(true) : setPublished(false);
     setIsSubmitting(false);
     // Reset form or show success message
+    setTimeout(() => {
+      nav("/blogs");
+    }, 100);
   };
 
   return (
