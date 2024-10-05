@@ -2,7 +2,8 @@ import { Hono } from "hono";
 import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode,jwt,sign,verify } from 'hono/jwt';
-import { signinInput, signupInput } from "@shivaraj0110/medium-common"
+import { createBlogPost, CreateBlogPost, signinInput, signupInput } from "@shivaraj0110/medium-common"
+import { ArrowDownAZ } from "lucide-react";
 
 export const userRouter = new Hono<{
 	Bindings: {
@@ -153,4 +154,79 @@ const res = await prisma.user.findFirst({
 return c.json({
   details : res
 })
+})
+
+userRouter.post("/bookmark",verifyUser,async (c)=> {
+  const body = await c.req.json() 
+  const userId = Number(c.get("userId"))
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate())
+try{
+  const {success} = createBlogPost.safeParse(body)
+  if(!success){
+    c.status(413)
+    c.json({
+      msg : "invalid inputs!"
+    })
+  }
+  const res = await prisma.bookmark.create({
+    data : {
+      userId,
+      postId : body.postId,
+    }
+  }
+)
+return c.json({
+  msg : "added to the bookmarks",
+  res
+})
+}
+catch(e){
+  c.status(413)
+ return c.json({
+    msg : "error while adding a bookmark!"
+  })
+}
+})
+
+userRouter.get("/bookmarks",verifyUser,async (c)=>{
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate()) 
+const userId = Number(c.get("userId"))
+try{
+  const res = await prisma.bookmark.findMany({
+    where :{ 
+      userId
+    },
+    select : {
+      post : {
+        select : {
+          author : {
+            select : {
+              name : true
+            }
+          },
+          id : true,
+          tags : true,
+          title : true,
+          content : true,
+          publishDate :true
+        }
+      },
+      createdAt : true,
+    }
+  })
+  c.status(200)
+  return c.json({
+    posts : res
+  })
+}
+catch(e){
+c.status(413)
+return c.json({
+  msg: "error while fetching the bookmarks!"
+})
+}
 })

@@ -1,5 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { backnedUrl } from "../config/url";
 
 export interface BlogData {
   authorName: string;
@@ -12,9 +14,23 @@ export interface BlogData {
 function Blogs(data: BlogData) {
   const [bookmarked, setBookMarked] = useState(false);
   const [forgotten, setForgotten] = useState(false);
-  const handleBookmark = async () => {
-    
-  }
+  const handleBookmark = async (id: number) => {
+    if (bookmarked === true) {
+      const res = await axios.post(
+        backnedUrl + "/api/v1/user/bookmark",
+        {
+          postId: id,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      alert(await res.data);
+    }
+  };
   return (
     <div>
       <div className="flex mt-6 flex-row justify-start md:ml-32 transi ml-12 min-w-[550px] pt-2">
@@ -52,6 +68,7 @@ function Blogs(data: BlogData) {
           className="flex ml-auto text-gray-500 mr-6 pt-11 hover:cursor-pointer "
           onClick={() => {
             setBookMarked(!bookmarked);
+            handleBookmark(data.id);
           }}>
           {!bookmarked ? (
             <svg

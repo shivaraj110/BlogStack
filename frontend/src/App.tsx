@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import AllBlogs from "./pages/AllBlogs";
 import FullBlog from "./pages/FullBlog";
 import { WriteBlog } from "./pages/WriteBlog";
+import Bookmarks from "./pages/Bookmarks";
 function App() {
   return (
     <>
@@ -14,9 +15,10 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-          <Route path="blog/:id" element={<FullBlog />} />
-          <Route path="blogs" element={<AllBlogs />} />
-          <Route path="WriteBlog" element={<WriteBlog />} />
+          <Route path="/blog/:id" element={<FullBlog />} />
+          <Route path="/blogs" element={<AllBlogs />} />
+          <Route path="/WriteBlog" element={<WriteBlog />} />
+          <Route path="/bookmarks" element={<Bookmarks />} />
         </Routes>
       </BrowserRouter>
     </>

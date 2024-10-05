@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { Prisma, PrismaClient, userSpecific } from '@prisma/client/edge'
+import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode,jwt,sign,verify } from 'hono/jwt';
 import { createBlogPost, CreateBlogPost, updateBlogPost, UpdateBlogPost } from "@shivaraj0110/medium-common";
@@ -178,33 +178,6 @@ return c.json({
 
 
 
-
-blogRouter.get("/bookmarks",async (c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate())
-    try{
-        const res = await prisma.userSpecific.findMany({
-            where : {
-                userId : Number(c.get("authorId"))
-            },
-            select : {
-                bookMarkedBlogId : true
-            }
-        })
-        return c.json({
-            bookMarkedBlogs : res
-        })
-    }
-    catch(e){
-        c.status(411)
-        return c.json({
-            msg : "error while fetching the bookmarks!"
-        })
-    }
-})
-
-
 blogRouter.get('/:id', async (c) => {
     const id = c.req.param('id')
     const prisma = new PrismaClient({
@@ -272,64 +245,6 @@ blogRouter.put('/publish',async(c)=>{
         c.status(411)
        return c.json({
             msg : "error while publishing the blog!"
-        })
-    }
-})
-blogRouter.post('/bookmark',async (c) => {
-    const body = await c.req.json()
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL,
-    }).$extends(withAccelerate())
-    const id  = Number(body.id)
-    try{
-        const existingBookMarks = await prisma.userSpecific.findFirst({
-            where : {
-                userId : Number(c.get("authorId"))
-            },
-            select : {
-                bookMarkedBlogId : true
-            }    
-        })
-        // @ts-ignore
-        
-        const index = (length(existingBookMarks)-1)
-        //@ts-ignore
-        if(existingBookMarks){
-            //@ts-ignore
-            const bookMarkedBlogId = existingBookMarks[index]
-            await prisma.userSpecific.update({
-                where : {
-                    userId : Number(c.get("authorId"))
-                },
-                data : {
-                    bookMarkedBlogId : [...bookMarkedBlogId,id]
-                }
-            })
-        c.json({
-            msg : "bookmark updated"
-        })  
-        }
-
-        else{
-                    const resp =  await prisma.userSpecific.create({
-            data : {
-                bookMarkedBlogId : [body.id],
-                userId : Number(c.get("authorId"))
-            },
-            select : {
-                bookMarkedBlogId : true
-            }
-        })
-        return c.json({
-                resp,
-                msg : "bookmarked the blog",
-            })
-        }
-    }
-    catch(e){
-        c.status(411)
-        return c.json({
-            msg : "error adding the bookmark"
         })
     }
 })
