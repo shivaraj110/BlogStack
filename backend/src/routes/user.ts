@@ -11,7 +11,8 @@ export const userRouter = new Hono<{
     JWT_SECRET:string
 	},
   Variables:{
-    userId : string
+    userId : string,
+    bookmarkId : string
 }
 }>();
 
@@ -228,5 +229,53 @@ c.status(413)
 return c.json({
   msg: "error while fetching the bookmarks!"
 })
+}
+})
+
+const getBookmarkId = async (c:any,next:any) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate())
+  const body = await c.req.json()
+  const postId = Number(body.id)
+  try{
+    const bookmarkId = await prisma.bookmark.findFirst({
+      where : {
+        postId
+      },
+      select : {
+        id : true
+      }
+     })
+     c.set("bookmarkId",String(bookmarkId?.id))
+    await next()
+  }
+  catch(e){
+    c.status(411)
+    return c.json({
+      msg : "no bookmark found!"
+    })
+  }
+}
+
+userRouter.delete("/bookmark",verifyUser,getBookmarkId,async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+}).$extends(withAccelerate())
+try{
+  await prisma.bookmark.deleteMany({
+  where : {
+    id : Number(c.get("bookmarkId"))
+  }
+ })
+ return c.json({
+  msg : "deleted the bookmark"
+ })
+}
+catch(e){
+  c.status(413)
+  return c.json({
+    msg : "error while deleting the bookmark!"
+  })
 }
 })
