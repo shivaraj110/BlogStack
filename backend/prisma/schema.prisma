@@ -32,6 +32,7 @@ model Post {
   publishDate String?
   tags        String[]
   bookmarks   Bookmark[]
+  bookmarked Boolean @default(false)
 }
 
 model Bookmark {

@@ -14,22 +14,38 @@ export interface BlogData {
 function Blogs(data: BlogData) {
   const [bookmarked, setBookMarked] = useState(false);
   const [forgotten, setForgotten] = useState(false);
+
+  const handleBookmarkRemove = async (id: number) => {
+    setBookMarked(!bookmarked);
+    const res = await axios.delete(backnedUrl + "/api/v1/user/bookmark", {
+      data: {
+        id,
+      },
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token"),
+        "Content-Type": "application/json",
+      },
+    });
+    const resp = await res.data;
+    alert(resp.msg);
+  };
+
   const handleBookmark = async (id: number) => {
-    if (bookmarked === true) {
-      const res = await axios.post(
-        backnedUrl + "/api/v1/user/bookmark",
-        {
-          postId: id,
+    setBookMarked(!bookmarked);
+    const res = await axios.post(
+      backnedUrl + "/api/v1/user/bookmark",
+      {
+        postId: id,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+          "Content-Type": "application/json",
         },
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      alert(await res.data);
-    }
+      }
+    );
+    const msg = await res.data.msg;
+    alert(msg);
   };
   return (
     <div>
@@ -64,14 +80,12 @@ function Blogs(data: BlogData) {
             {Math.ceil(data.content.length / 100)} {"min read"}
           </div>
         </div>
-        <div
-          className="flex ml-auto text-gray-500 mr-6 pt-11 hover:cursor-pointer "
-          onClick={() => {
-            setBookMarked(!bookmarked);
-            handleBookmark(data.id);
-          }}>
+        <div className="flex ml-auto text-gray-500 mr-6 pt-11 hover:cursor-pointer ">
           {!bookmarked ? (
             <svg
+              onClick={() => {
+                handleBookmark(data.id);
+              }}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -86,6 +100,9 @@ function Blogs(data: BlogData) {
             </svg>
           ) : (
             <svg
+              onClick={() => {
+                handleBookmarkRemove(data.id);
+              }}
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

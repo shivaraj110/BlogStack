@@ -1,7 +1,7 @@
-import Blogs from "../components/Blogs";
 import Appbar from "../components/Appbar";
 import { useBookmarks } from "../hooks/useBlogs";
 import ResponsiveBlogLoadingSkeleton from "../components/ResponsiveBlogLoadingSkeleton";
+import BookmarkBlog from "../components/BookmarkBlogs";
 
 function Bookmarks() {
   const { loading, blogs } = useBookmarks();
@@ -23,7 +23,7 @@ function Bookmarks() {
         <div className="flex flex-col">
           <div className="mt-24">
             {blogs.map((b) => (
-              <Blogs
+              <BookmarkBlog
                 authorName={b.post.author.name || "Anonymous"}
                 title={b.post.title}
                 content={b.post.content}
