@@ -1,5 +1,1 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-
- export const backnedUrl = process.env.BACKEND_URL as string
+export const backnedUrl = "https://backend.shivarajchandaragi9.workers.dev"
