@@ -41,7 +41,7 @@ blogRouter.post('/', async(c) => {
     const d = new Date();
     const month = months[d.getMonth()];
     const year = d.getFullYear()
-    const suffix = date[date.length -1 ] === "1" ? "st " : date[date.length -1 ] === "2" ? "nd " : date[date.length -1 ] === "3" ? "rd " : date[date.length -1 ] in ["4","5","6","7","8","9","10"] ? "th " : "th"
+    const suffix = date[date.length -1 ] === "1" ? "st " : date[date.length -1 ] === "2" ? "nd " : date[date.length -1 ] === "3" ? "rd " : date[date.length -1 ] in ["4","5","6","7","8","9","10"] ? "th " : "th "
     try{
 
         const {success} = createBlogPost.safeParse(body)
