@@ -1,15 +1,19 @@
-FROM node:lts-alpine
+FROM node:18-slim
 
-ENV NODE_ENV=production
+# Install dependencies
+RUN apt-get -qq update && \
+    apt-get install -qqy --no-install-recommends \
+        ca-certificates \
+        libc++-dev &&  \
+    rm -rf /var/lib/apt/lists/*
+RUN npm install -g wrangler
+WORKDIR /usr/src/app
 
-WORKDIR /app
+COPY package*.json ./
+
+RUN npm ci --only=production
 
 COPY . .
 
-RUN npm install 
-RUN npm run build
-RUN npx prisma generate
-
-EXPOSE 3000
-
-CMD ["node", "dist/index.js"]
+EXPOSE 8080
+CMD [ "npm", "run","dev" ]
