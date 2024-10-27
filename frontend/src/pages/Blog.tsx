@@ -3,7 +3,7 @@ import { BlogData } from "../components/Blogs";
 export function Blog(data: BlogData) {
   return (
     <div className="grid px-10 grid-cols-5">
-      <div className=" mt-28 flex flex-col md:col-span-3 col-span-5">
+      <div className=" mt-28 ml-36 flex flex-col md:col-span-3 col-span-5">
         <div className="poppins-bold text-4xl ">{data.title}</div>
         <div className="text-xl text-gray-600 self- mt-4 poppins-light">
           Published on {data.publishDate}
