@@ -20,6 +20,12 @@ model User {
   password  String
   posts     Post[]
   bookmarks Bookmark[]
+  connections Connections[]
+}
+
+model Connections{
+  id Int @id @default(autoincrement())
+  connections User[]
 }
 
 model Post {
