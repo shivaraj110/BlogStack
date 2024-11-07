@@ -80,8 +80,10 @@ function Blogs(data: BlogData) {
             {Math.ceil(data.content.length / 100)} {"min read"}
           </div>
         </div>
-        <div className="flex ml-auto text-gray-500 mr-6 pt-11 hover:cursor-pointer ">
-          {!bookmarked ? (
+        <div className="flex ml-auto text-gray-500 mr-6 hover:cursor-pointer ">
+        <section className="flex justify-center items-center">
+      <button className="group text-gray-500 pt-10 hover:cursor-pointer flex justify-center rounded-md drop-shadow-xl" >
+      {!bookmarked ? (
             <svg
               onClick={() => {
                 handleBookmark(data.id);
@@ -116,13 +118,18 @@ function Blogs(data: BlogData) {
               />
             </svg>
           )}
-        </div>
-        <div
-          onClick={() => {
+        <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">
+          { bookmarked?"Remove bookmark":"Bookmark" }
+        </span>
+        </button>
+    </section>
+    </div>
+        <section className="flex justify-center items-center">
+      <button onClick={() => {
             setForgotten(!forgotten);
-          }}
-          className="flex mr-6 text-gray-500 pt-11 hover:cursor-pointer">
-          {forgotten ? (
+      }} 
+      className="group mr-5 text-gray-500 pt-10 hover:cursor-pointer flex justify-center rounded-md drop-shadow-xl" >
+      {forgotten ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -151,9 +158,15 @@ function Blogs(data: BlogData) {
               />
             </svg>
           )}
-        </div>
-        <div className="flex mr-12 md:mr-36 text-gray-500 pt-11 hover:cursor-pointer">
-          <svg
+        <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">
+          { forgotten? "Unmute":"mute" }
+        </span>
+        </button>
+    </section>
+         
+          <section className="flex justify-center items-center">
+      <button className="group mr-12 md:mr-36 text-gray-500 pt-10 hover:cursor-pointer flex justify-center rounded-md drop-shadow-xl" >
+      <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
@@ -166,7 +179,11 @@ function Blogs(data: BlogData) {
               d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-        </div>
+        <span className="absolute opacity-0 group-hover:opacity-100 group-hover:text-gray-700 group-hover:text-sm group-hover:-translate-y-10 duration-700">
+          Options
+        </span>
+        </button>
+    </section>
       </div>
       <div className="h-[0.5px] mt-10 important md:ml-32 ml-12 md:mr-32 transi mr-12 bg-gray-300"></div>
     </div>
