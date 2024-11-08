@@ -1,18 +1,9 @@
 import { BookOpen, Pencil, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "../hooks/useBlogs";
-interface BlogData {
-  title: string;
-  content: string;
-  publishDate?: string;
-  id: number;
-  tags: string[];
-  author: {
-    name: string;
-  };
-}
+
 function Landing() {
-  const { loading, blogs } = useBlogs();
+  const { blogs } = useBlogs();
   let featuredBlogs = [];
   featuredBlogs.push(blogs[2]);
   featuredBlogs.push(blogs[5]);
