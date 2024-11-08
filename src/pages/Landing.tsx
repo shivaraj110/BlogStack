@@ -163,7 +163,7 @@ function Landing() {
               {" "}
               {featuredBlogs.map((post) => (
                 <div
-                  key={post.id}
+                  key={post?.id}
                   className="bg-white rounded-lg hover:-translate-y-4 transi  shadow-md overflow-hidden">
                   {" "}
                   <div className="p-6">
@@ -173,17 +173,17 @@ function Landing() {
                       {}{" "}
                     </h3>{" "}
                     <p className="text-gray-600 mb-4">
-                      {post.content.slice(0, 100)}
+                      {post?.content.slice(0, 100)}
                     </p>{" "}
                     <div className="flex justify-between items-center">
                       {" "}
                       <div className="text-sm text-gray-500">
                         {" "}
-                        <p>{post.author.name}</p> <p>{post.publishDate}</p>{" "}
+                        <p>{post?.author.name}</p> <p>{post?.publishDate}</p>{" "}
                       </div>{" "}
                       <Link
-                        to={`/blog/${Number(post.id + 5)}`}
-                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer transition-colors">
+                        to={`/blog/${Number(post?.id)}`}
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
                         {" "}
                         Read More{" "}
                       </Link>{" "}
