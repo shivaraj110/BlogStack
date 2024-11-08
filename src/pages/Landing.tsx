@@ -1,30 +1,22 @@
 import { BookOpen, Pencil, Users } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useBlogs } from "../hooks/useBlogs";
+interface BlogData {
+  title: string;
+  content: string;
+  publishDate?: string;
+  id: number;
+  tags: string[];
+  author: {
+    name: string;
+  };
+}
 function Landing() {
-  const Post = [
-    {
-      id: "1",
-      title: "The Future of Web Development",
-      excerpt: "Exploring upcoming trends in web technologies...",
-      date: "2023-09-15",
-      author: "Alice Johnson",
-    },
-    {
-      id: "2",
-      title: "Mastering Remix - Break out of the crowd",
-      excerpt: "Advanced techniques to level up your Remix skills...",
-      date: "2023-09-10",
-      author: "Bob Smith",
-    },
-    {
-      id: "3",
-      title: "Design Systems in 2023",
-      excerpt: "How design systems are evolving in modern web development...",
-      date: "2023-09-05",
-      author: "Charlie Brown",
-    },
-  ];
-
+  const { loading, blogs } = useBlogs();
+  let featuredBlogs = [];
+  featuredBlogs.push(blogs[2]);
+  featuredBlogs.push(blogs[5]);
+  featuredBlogs.push(blogs[6]);
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {" "}
@@ -169,7 +161,7 @@ function Landing() {
             </h2>{" "}
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {" "}
-              {Post.map((post) => (
+              {featuredBlogs.map((post) => (
                 <div
                   key={post.id}
                   className="bg-white rounded-lg hover:-translate-y-4 transi  shadow-md overflow-hidden">
@@ -178,18 +170,20 @@ function Landing() {
                     {" "}
                     <h3 className="text-xl font-semibold text-gray-500 mb-2">
                       {" "}
-                      {post.title}{" "}
+                      {}{" "}
                     </h3>{" "}
-                    <p className="text-gray-600 mb-4">{post.excerpt}</p>{" "}
+                    <p className="text-gray-600 mb-4">
+                      {post.content.slice(0, 100)}
+                    </p>{" "}
                     <div className="flex justify-between items-center">
                       {" "}
                       <div className="text-sm text-gray-500">
                         {" "}
-                        <p>{post.author}</p> <p>{post.date}</p>{" "}
+                        <p>{post.author.name}</p> <p>{post.publishDate}</p>{" "}
                       </div>{" "}
                       <Link
                         to={`/blog/${Number(post.id + 5)}`}
-                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 cursor-pointer transition-colors">
                         {" "}
                         Read More{" "}
                       </Link>{" "}
