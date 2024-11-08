@@ -18,17 +18,17 @@ function Landing() {
   featuredBlogs.push(blogs[5]);
   featuredBlogs.push(blogs[6]);
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-blue-800">
       {" "}
-      <header className="border-b">
+      <header className=" bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular flex justify-center">
         {" "}
-        <div className="container mx-auto transi px-4 py-4">
+        <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit  transi p-4">
           {" "}
-          <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-center gap-6 items-center">
             {" "}
             <Link
               to="/"
-              className="text-2xl font-bold poppins-semibold text-blue-600 mb-4 sm:mb-0">
+              className="text-2xl font-bold poppins-semibold text-blue-600 mr-24 mb-4 sm:mb-0">
               {" "}
               BlogStack{" "}
             </Link>{" "}
@@ -79,70 +79,70 @@ function Landing() {
       </header>{" "}
       <main className="flex-grow">
         {" "}
-        <section className="bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular text-white py-20">
+        <section className="bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular border-b text-white py-20">
           {" "}
           <div className="container mx-auto px-4 text-center">
             {" "}
-            <h1 className="text-5xl font-bold mb-6">
+            <h1 className="text-5xl font-bold mb-6 backdrop-blur-sm text-white/90">
               Welcome to BlogStack
             </h1>{" "}
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
+            <p className="text-xl mb-8 max-w-2xl mx-auto text-white/65">
               {" "}
               Elevate your writing, connect with readers, and build your online
               presence with our powerful blogging platform.{" "}
             </p>{" "}
             <Link
               to="/signup"
-              className="inline-block px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+              className="inline-block px-6 py-3 bg-white/30 hover:bg-white/45 border-[1.5px] backdrop-blur-lg hover:text-blue-700/90 text-white/90 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
               {" "}
               Get Started{" "}
             </Link>{" "}
           </div>{" "}
         </section>{" "}
-        <section className="py-16 poppins-light bg-gray-100">
+        <section className="py-16 poppins-light">
           {" "}
           <div className="container mx-auto px-4">
             {" "}
-            <h2 className="text-3xl font-bold text-gray-500 mb-12 text-center">
+            <h2 className="text-3xl font-bold text-white mb-12 text-center">
               {" "}
               Why Choose BlogStack?{" "}
             </h2>{" "}
             <div className="grid md:grid-cols-3 gap-8">
               {" "}
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className=" border-[1.5px] bg-white/45 backdrop-blur-sm p-6 rounded-lg shadow-md">
                 {" "}
                 <Pencil className="w-10 h-10 text-blue-600 mb-4" />{" "}
-                <h3 className="text-xl font-semibold mb-2 text-gray-500 ">
+                <h3 className="text-xl font-semibold mb-2 text-blue-600 ">
                   {" "}
                   Easy to Use{" "}
                 </h3>{" "}
-                <p className="text-gray-600">
+                <p className="text-blue-700">
                   {" "}
                   Intuitive interface designed for writers of all levels. Start
                   creating beautiful posts in minutes.{" "}
                 </p>{" "}
               </div>{" "}
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className=" border-[1.5px] bg-white/45 backdrop-blur-sm p-6 rounded-lg shadow-md">
                 {" "}
                 <BookOpen className="w-10 h-10 text-blue-600 mb-4" />{" "}
-                <h3 className="text-xl font-semibold mb-2 text-gray-500 ">
+                <h3 className="text-xl font-semibold mb-2 text-blue-600 ">
                   {" "}
                   Rich Features{" "}
                 </h3>{" "}
-                <p className="text-gray-600">
+                <p className="text-blue-700">
                   {" "}
                   From markdown support to SEO tools, we provide everything you
                   need to make your content shine.{" "}
                 </p>{" "}
               </div>{" "}
-              <div className="bg-white p-6 rounded-lg shadow-md">
+              <div className=" border-[1.5px] bg-white/45 backdrop-blur-sm p-6 rounded-lg shadow-md">
                 {" "}
                 <Users className="w-10 h-10 text-blue-600 mb-4" />{" "}
-                <h3 className="text-xl font-semibold mb-2 text-gray-500 ">
+                <h3 className="text-xl font-semibold mb-2 text-blue-600 ">
                   {" "}
                   Growing Community{" "}
                 </h3>{" "}
-                <p className="text-gray-600">
+                <p className="text-blue-700">
                   {" "}
                   Connect with other writers, collaborate on projects, and grow
                   your audience organically.{" "}
@@ -155,7 +155,7 @@ function Landing() {
           {" "}
           <div className="container mx-auto px-4">
             {" "}
-            <h2 className="text-3xl font-bold text-gray-500 mb-8 text-center">
+            <h2 className="text-3xl font-bold text-white/90 mb-8 text-center">
               {" "}
               Featured Posts{" "}
             </h2>{" "}
@@ -164,7 +164,7 @@ function Landing() {
               {featuredBlogs.map((post) => (
                 <div
                   key={post?.id}
-                  className="bg-white rounded-lg hover:-translate-y-4 transi  shadow-md overflow-hidden">
+                  className="bg-white border-[1.5px] bg-white/45 backdrop-blur-sm rounded-lg hover:-translate-y-4 transi  shadow-md overflow-hidden">
                   {" "}
                   <div className="p-6">
                     {" "}
@@ -173,7 +173,7 @@ function Landing() {
                       {}{" "}
                     </h3>{" "}
                     <p className="text-gray-600 mb-4">
-                      {post?.content.slice(0, 100)}
+                      {post?.content.slice(0, 100) + "..."}
                     </p>{" "}
                     <div className="flex justify-between items-center">
                       {" "}
@@ -196,7 +196,7 @@ function Landing() {
         </section>{" "}
         <Link
           to={`/blogs`}
-          className="px-4 py-2 bg-blue-600 text-white rounded max-w-32 mx-auto text-center  mb-8 flex flex-col hover:bg-blue-700 transition-colors">
+          className="px-4 py-2 bg-blue-600 text-white rounded max-w-32 mx-auto text-center bg-white/30 font-semibold hover:bg-white/45 border-[1.5px] backdrop-blur-lg hover:text-blue-700/90 text-white/90 mb-8 flex flex-col hover:bg-blue-700 transition-colors">
           {" "}
           More posts{" "}
         </Link>{" "}
@@ -284,6 +284,7 @@ function Landing() {
               <h3 className="text-lg font-semibold mb-4">Legal</h3>{" "}
               <ul className="space-y-2">
                 {" "}
+                get
                 <li>
                   {" "}
                   <Link to="/privacy" className="text-sm hover:underline">
