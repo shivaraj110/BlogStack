@@ -74,7 +74,7 @@ function Landing() {
           {" "}
           <div className="container mx-auto px-4 h-fit text-center">
             {" "}
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r h-16 from-blue-100 to-blue-500 text-transparent bg-clip-text">
+            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r h-16 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
               Welcome to BlogStack
             </h1>{" "}
             <p className="text-xl mb-6 max-w-2xl mx-auto text-white/65">
