@@ -13,7 +13,7 @@ function Landing() {
       {" "}
       <header className=" bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular flex justify-center">
         {" "}
-        <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit  transi p-4">
+        <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit  transi p-3">
           {" "}
           <div className="flex flex-col sm:flex-row justify-center gap-6 items-center">
             {" "}
@@ -48,19 +48,19 @@ function Landing() {
                 <li>
                   {" "}
                   <Link
-                    to="/signup"
-                    className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors text-sm">
+                    to="/about"
+                    className="text-gray-600 hover:text-blue-600 transition-colors">
                     {" "}
-                    Sign Up{" "}
+                    Signup{" "}
                   </Link>{" "}
                 </li>{" "}
                 <li>
                   {" "}
                   <Link
-                    to="/login"
-                    className="px-3 py-1 border border-blue-600 text-blue-600 rounded hover:bg-blue-600 hover:text-white transition-colors text-sm">
+                    to="/about"
+                    className="text-gray-600 hover:text-blue-600 pr-1 transition-colors">
                     {" "}
-                    Log In{" "}
+                    Login{" "}
                   </Link>{" "}
                 </li>{" "}
               </ul>{" "}
@@ -72,19 +72,19 @@ function Landing() {
         {" "}
         <section className="bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular border-b text-white py-20">
           {" "}
-          <div className="container mx-auto px-4 text-center">
+          <div className="container mx-auto px-4 h-fit text-center">
             {" "}
-            <h1 className="text-5xl font-bold mb-6 backdrop-blur-sm text-white/90">
+            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r h-16 from-blue-100 to-blue-500 text-transparent bg-clip-text">
               Welcome to BlogStack
             </h1>{" "}
-            <p className="text-xl mb-8 max-w-2xl mx-auto text-white/65">
+            <p className="text-xl mb-6 max-w-2xl mx-auto text-white/65">
               {" "}
               Elevate your writing, connect with readers, and build your online
               presence with our powerful blogging platform.{" "}
             </p>{" "}
             <Link
               to="/signup"
-              className="inline-block px-6 py-3 bg-white/30 hover:bg-white/45 border-[1.5px] backdrop-blur-lg hover:text-blue-700/90 text-white/90 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
+              className="inline-block px-6 py-3 bg-white/30 hover:bg-white/60 border-[1.5px] backdrop-blur-lg hover:text-gray-700/90 text-white/90 font-semibold rounded-lg hover:bg-gray-100 transition-colors">
               {" "}
               Get Started{" "}
             </Link>{" "}
@@ -100,40 +100,40 @@ function Landing() {
             </h2>{" "}
             <div className="grid md:grid-cols-3 gap-8">
               {" "}
-              <div className=" border-[1.5px] bg-white/45 backdrop-blur-sm p-6 rounded-lg shadow-md">
+              <div className=" border-[1.5px] bg-white/60 backdrop-blur-sm p-6 rounded-lg shadow-md">
                 {" "}
                 <Pencil className="w-10 h-10 text-blue-600 mb-4" />{" "}
                 <h3 className="text-xl font-semibold mb-2 text-blue-600 ">
                   {" "}
                   Easy to Use{" "}
                 </h3>{" "}
-                <p className="text-blue-700">
+                <p className="text-gray-700">
                   {" "}
                   Intuitive interface designed for writers of all levels. Start
                   creating beautiful posts in minutes.{" "}
                 </p>{" "}
               </div>{" "}
-              <div className=" border-[1.5px] bg-white/45 backdrop-blur-sm p-6 rounded-lg shadow-md">
+              <div className=" border-[1.5px] bg-white/60 backdrop-blur-sm p-6 rounded-lg shadow-md">
                 {" "}
                 <BookOpen className="w-10 h-10 text-blue-600 mb-4" />{" "}
                 <h3 className="text-xl font-semibold mb-2 text-blue-600 ">
                   {" "}
                   Rich Features{" "}
                 </h3>{" "}
-                <p className="text-blue-700">
+                <p className="text-gray-700">
                   {" "}
                   From markdown support to SEO tools, we provide everything you
                   need to make your content shine.{" "}
                 </p>{" "}
               </div>{" "}
-              <div className=" border-[1.5px] bg-white/45 backdrop-blur-sm p-6 rounded-lg shadow-md">
+              <div className=" border-[1.5px] bg-white/60 backdrop-blur-sm p-6 rounded-lg shadow-md">
                 {" "}
                 <Users className="w-10 h-10 text-blue-600 mb-4" />{" "}
                 <h3 className="text-xl font-semibold mb-2 text-blue-600 ">
                   {" "}
                   Growing Community{" "}
                 </h3>{" "}
-                <p className="text-blue-700">
+                <p className="text-gray-700">
                   {" "}
                   Connect with other writers, collaborate on projects, and grow
                   your audience organically.{" "}
@@ -155,7 +155,7 @@ function Landing() {
               {featuredBlogs.map((post) => (
                 <div
                   key={post?.id}
-                  className="bg-white border-[1.5px] bg-white/45 backdrop-blur-sm rounded-lg hover:-translate-y-4 transi  shadow-md overflow-hidden">
+                  className="bg-white border-[1.5px] bg-white/60 backdrop-blur-sm rounded-lg hover:-translate-y-4 transi  shadow-md overflow-hidden">
                   {" "}
                   <div className="p-6">
                     {" "}
@@ -163,7 +163,7 @@ function Landing() {
                       {" "}
                       {}{" "}
                     </h3>{" "}
-                    <p className="text-gray-600 mb-4">
+                    <p className="text-gray-700 mb-4">
                       {post?.content.slice(0, 100) + "..."}
                     </p>{" "}
                     <div className="flex justify-between items-center">
@@ -187,7 +187,7 @@ function Landing() {
         </section>{" "}
         <Link
           to={`/blogs`}
-          className="px-4 py-2 bg-blue-600 text-white rounded max-w-32 mx-auto text-center bg-white/30 font-semibold hover:bg-white/45 border-[1.5px] backdrop-blur-lg hover:text-blue-700/90 text-white/90 mb-8 flex flex-col hover:bg-blue-700 transition-colors">
+          className="px-4 py-2 bg-blue-600 text-white rounded max-w-32 mx-auto text-center bg-white/30 font-semibold hover:bg-white/60 border-[1.5px] backdrop-blur-lg hover:text-gray-700/90 text-white/90 mb-8 flex flex-col hover:bg-blue-700 transition-colors">
           {" "}
           More posts{" "}
         </Link>{" "}
