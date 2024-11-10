@@ -59,7 +59,7 @@ function Signup() {
                 <input
                   type="text"
                   placeholder="Enter your username"
-                  className=" p-1 pr-[155px] text-start outline-none bg-transparent border-b"
+                  className=" p-1 pr-[155px] text-start outline-none w-full bg-transparent border-b"
                   onChange={(e) => {
                     setSignupPayload({
                       ...signupPayload,
@@ -75,7 +75,7 @@ function Signup() {
                 <input
                   type="email"
                   placeholder="example@gmail.com"
-                  className=" p-1 pr-[155px] text-start outline-none bg-transparent border-b"
+                  className=" p-1 pr-[155px] text-start outline-none w-full bg-transparent border-b"
                   onChange={(e) => {
                     setSignupPayload({
                       ...signupPayload,
@@ -91,7 +91,7 @@ function Signup() {
                 <input
                   type="password"
                   placeholder=""
-                  className=" p-1 pr-[155px] outline-none text-start bg-transparent border-b"
+                  className=" p-1 pr-[155px] outline-none text-start w-full bg-transparent border-b"
                   onChange={(e) => {
                     setSignupPayload({
                       ...signupPayload,
@@ -102,7 +102,7 @@ function Signup() {
               </div>
               <button
                 type="submit"
-                className="bg-blue-500 rounded-lg text-white poppins-semibold mt-6 p-1"
+                className="bg-blue-500 rounded-lg text-white poppins-semibold mt-6 2xl:mt-10 p-1"
                 onClick={signupUser}>
                 {pressed ? "Signing up" : "Signup"}
               </button>

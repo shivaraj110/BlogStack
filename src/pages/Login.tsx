@@ -37,21 +37,21 @@ function Login() {
   };
 
   return (
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-2 bg-gradient-to-tr from-blue-800 to-blue-400">
       <div className="md:col-span-1 col-span-2 ">
         <div className=" h-screen flex flex-col justify-center">
           <div className="flex justify-center">
             <div className="flex flex-col">
-              <div className="text-3xl text-center poppins-bold">
+              <div className="text-3xl 2xl:text-[45px] text-center text-white/80 poppins-bold">
                 Login to your account
               </div>
-              <div className="text-sm poppins-semibold text-center text-gray-400">
+              <div className="text-sm 2xl:text-xl mt-1 2xl:mt-3 poppins-semibold text-center text-white/70">
                 Don't have an account ?{" "}
                 <Link to={"/signup"} className="underline cursor-pointer">
                   Signup
                 </Link>
               </div>
-              <div className="poppins-medium text-left mt-[25px] mb-2">
+              <div className="poppins-medium text-left mt-[25px] mb-2 text-white/70">
                 Email
               </div>
               <div className="flex justify-start ml-0  text-left">
@@ -64,10 +64,10 @@ function Login() {
                   }}
                   type="email"
                   placeholder="example@gmail.com"
-                  className="border rounded-md p-1 pr-[155px] text-start border-gray-500"
+                  className=" p-1 pr-[155px] outline-none text-start w-full bg-transparent border-b"
                 />
               </div>
-              <div className="poppins-medium text-left mt-[25px] mb-2">
+              <div className="poppins-medium text-left mt-[25px] mb-2 text-white/70">
                 Password
               </div>
               <div className="flex justify-start ml-0 text-left">
@@ -80,7 +80,7 @@ function Login() {
                   }}
                   type="password"
                   placeholder=""
-                  className="border rounded-md p-1 pr-[155px] text-start border-gray-500"
+                  className=" p-1 pr-[155px] outline-none text-start w-full bg-transparent border-b"
                 />
               </div>
               <button
