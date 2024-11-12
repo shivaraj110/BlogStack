@@ -164,7 +164,9 @@ function Landing() {
                       {}{" "}
                     </h3>{" "}
                     <p className="text-gray-700 mb-4">
-                      {post?.content.slice(0, 100) + "..."}
+                      {post?.content
+                        ? post?.content.slice(0, 100) + "..."
+                        : "loading..."}
                     </p>{" "}
                     <div className="flex justify-between items-center">
                       {" "}
