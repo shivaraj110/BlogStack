@@ -64,7 +64,7 @@ function Login() {
                   }}
                   type="email"
                   placeholder="example@gmail.com"
-                  className=" p-1 pr-[155px] outline-none text-start w-full bg-transparent border-b"
+                  className=" p-1 pr-[155px] outline-none text-start w-full text-white/70 bg-transparent border-b"
                 />
               </div>
               <div className="poppins-medium text-left mt-[25px] mb-2 text-white/70">
@@ -80,12 +80,12 @@ function Login() {
                   }}
                   type="password"
                   placeholder=""
-                  className=" p-1 pr-[155px] outline-none text-start w-full bg-transparent border-b"
+                  className=" p-1 pr-[155px] outline-none text-start w-full text-white/70 bg-transparent border-b"
                 />
               </div>
               <button
                 onClick={loginUser}
-                className="bg-blue-500 rounded-lg text-white poppins-semibold mt-6 p-1">
+                className="bg-blue-500 rounded-lg text-white/70 poppins-semibold mt-6 p-1">
                 {pressed ? "Logging in " : "Login"}
               </button>
             </div>
