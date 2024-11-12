@@ -167,7 +167,6 @@ function Landing() {
                       {post?.content
                         ? post?.content.slice(0, 100) + "..."
                         : "loading..."}
-                      ss
                     </p>{" "}
                     <div className="flex justify-between items-center">
                       {" "}
