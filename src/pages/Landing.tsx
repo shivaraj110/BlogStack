@@ -11,21 +11,21 @@ function Landing() {
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-blue-800">
       {" "}
-      <header className=" bg-gradient-to-r from-blue-600 to-blue-800 poppins-regular flex justify-center">
+      <header className=" poppins-regular flex justify-center">
         {" "}
-        <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit  transi p-3">
+        <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit transi p-3">
           {" "}
-          <div className="flex flex-col sm:flex-row justify-center gap-6 items-center">
+          <div className="flex flex-row justify-center gap-6 items-center">
             {" "}
             <Link
               to="/"
-              className="text-2xl font-bold poppins-semibold text-blue-600 mr-24 mb-4 sm:mb-0">
+              className="text-2xl font-bold poppins-semibold text-blue-600 sm:mr-24 mr-2 sm:mb-0">
               {" "}
               BlogStack{" "}
             </Link>{" "}
             <nav>
               {" "}
-              <ul className="flex flex-wrap justify-center poppins-regular sm:justify-end space-x-4">
+              <ul className="flex flex-wrap justify-center poppins-regular space-x-2">
                 {" "}
                 <li>
                   {" "}
@@ -74,7 +74,7 @@ function Landing() {
           {" "}
           <div className="container mx-auto px-4 h-fit text-center">
             {" "}
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r h-16 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
+            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r sm:h-16 h-32 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
               Welcome to BlogStack
             </h1>{" "}
             <p className="text-xl mb-6 max-w-2xl mx-auto text-white/65">
