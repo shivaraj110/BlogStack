@@ -48,7 +48,7 @@ function Landing() {
                 <li>
                   {" "}
                   <Link
-                    to="/about"
+                    to="/signup"
                     className="text-gray-600 hover:text-blue-600 transition-colors">
                     {" "}
                     Signup{" "}
@@ -57,7 +57,7 @@ function Landing() {
                 <li>
                   {" "}
                   <Link
-                    to="/about"
+                    to="/login"
                     className="text-gray-600 hover:text-blue-600 pr-1 transition-colors">
                     {" "}
                     Login{" "}
