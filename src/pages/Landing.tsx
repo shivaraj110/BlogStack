@@ -167,6 +167,7 @@ function Landing() {
                       {post?.content
                         ? post?.content.slice(0, 100) + "..."
                         : "loading..."}
+                      ss
                     </p>{" "}
                     <div className="flex justify-between items-center">
                       {" "}
@@ -206,16 +207,16 @@ function Landing() {
               Subscribe to our newsletter for the latest blogging tips, feature
               updates, and community highlights.{" "}
             </p>{" "}
-            <form className="flex max-w-md mx-auto">
+            <form className="flex max-w-md mx-auto sm:flex-row flex-col ">
               {" "}
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-grow px-4 py-2 rounded-l-lg border-t border-b border-l border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                className="flex-grow px-4 py-2 sm:rounded-l-lg sm:rounded-none rounded-lg border-t border-b border-l border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
               />{" "}
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-600 text-white font-semibold rounded-r-lg hover:bg-blue-700 transition-colors">
+                className="px-6 py-2 bg-blue-600 text-white font-semibold sm:rounded-r-lg sm:rounded-none rounded-lg sm:mt-0 mt-4 hover:bg-blue-700 transition-colors">
                 {" "}
                 Subscribe{" "}
               </button>{" "}
