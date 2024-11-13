@@ -49,17 +49,6 @@ function Landing() {
           </li>
         </ul>
       </div>{" "}
-      <div
-        className={` flex justify-end pr-5 sm:hidden transi -translate-y-12 ${
-          isMobile ? "-translate-y-[252px]" : null
-        }`}>
-        <Link
-          to="/"
-          className="text-2xl font-bold poppins-semibold bg-gradient-to-r   from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text sm:mr-24 sm:mb-0">
-          {" "}
-          BlogStack{" "}
-        </Link>{" "}
-      </div>
       <header className=" poppins-regular sm:flex hidden justify-center">
         {" "}
         <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit transi p-3">
