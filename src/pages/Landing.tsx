@@ -26,7 +26,7 @@ function Landing() {
       <div
         className={` h-full rounded-r-lg ${
           !isMobile ? "-translate-x-48 h-1" : null
-        }  transi bg-white/45 backdrop-blur-md -translate-y-10 w-fit flex-col `}>
+        }  transi bg-white/45 backdrop-blur-md -translate-y-12 w-fit flex-col `}>
         <div
           onClick={() => {
             setIsMobile(false);
