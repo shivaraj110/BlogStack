@@ -50,7 +50,7 @@ function Landing() {
         </ul>
       </div>{" "}
       <div
-        className={` flex justify-end pr-5 transi -translate-y-12 ${
+        className={` flex justify-end pr-5 sm:hidden transi -translate-y-12 ${
           isMobile ? "-translate-y-[252px]" : null
         }`}>
         <Link
