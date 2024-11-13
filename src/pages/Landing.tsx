@@ -1,8 +1,10 @@
 import { BookOpen, Pencil, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useBlogs } from "../hooks/useBlogs";
+import { useState } from "react";
 
 function Landing() {
+  const [isMobile, setIsMobile] = useState(false);
   const { blogs } = useBlogs();
   let featuredBlogs = [];
   featuredBlogs.push(blogs[2]);
@@ -10,8 +12,55 @@ function Landing() {
   featuredBlogs.push(blogs[6]);
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-blue-800">
-      {" "}
-      <header className=" poppins-regular flex justify-center">
+      <div
+        onClick={() => {
+          setIsMobile(true);
+        }}
+        className={` ${
+          isMobile ? " -translate-x-20 " : null
+        } p-5 space-y-1 sm:hidden cursor-pointer `}>
+        <div className="bg-white/80 w-6 rounded-lg h-1 "></div>
+        <div className="bg-white/80 w-6 rounded-lg h-1 "></div>
+        <div className="bg-white/80 w-6 rounded-lg h-1 "></div>
+      </div>
+      <div
+        className={` h-full rounded-r-lg ${
+          !isMobile ? "-translate-x-48 h-1" : null
+        }  transi bg-white/45 backdrop-blur-md -translate-y-10 w-fit flex-col `}>
+        <div
+          onClick={() => {
+            setIsMobile(false);
+          }}
+          className="flex justify-end pr-4 pt-2 cursor-pointer font-semibold">
+          X
+        </div>
+        <ul className="space-y-4 px-16 sm:hidden text-gray-700 mt-2 mb-6">
+          <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
+            About
+          </li>
+          <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
+            Contact
+          </li>
+          <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
+            Signup
+          </li>
+          <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
+            Login
+          </li>
+        </ul>
+      </div>{" "}
+      <div
+        className={` flex justify-end pr-5 transi -translate-y-12 ${
+          isMobile ? "-translate-y-[252px]" : null
+        }`}>
+        <Link
+          to="/"
+          className="text-2xl font-bold poppins-semibold bg-gradient-to-r   from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text sm:mr-24 sm:mb-0">
+          {" "}
+          BlogStack{" "}
+        </Link>{" "}
+      </div>
+      <header className=" poppins-regular sm:flex hidden justify-center">
         {" "}
         <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit transi p-3">
           {" "}
@@ -19,13 +68,13 @@ function Landing() {
             {" "}
             <Link
               to="/"
-              className="text-2xl font-bold poppins-semibold text-blue-600 sm:mr-24 mr-2 sm:mb-0">
+              className="text-2xl font-bold poppins-semibold text-blue-600 sm:mr-24 sm:mb-0">
               {" "}
               BlogStack{" "}
             </Link>{" "}
             <nav>
               {" "}
-              <ul className="flex flex-wrap justify-center poppins-regular space-x-2">
+              <ul className="flex flex-wrap justify-center poppins-regular space-x-4">
                 {" "}
                 <li>
                   {" "}
@@ -74,7 +123,7 @@ function Landing() {
           {" "}
           <div className="container mx-auto px-4 h-fit text-center">
             {" "}
-            <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r sm:h-16 h-32 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
+            <h1 className="text-5xl font-bold transi mb-6 bg-gradient-to-r sm:h-16 h-32 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
               Welcome to BlogStack
             </h1>{" "}
             <p className="text-xl mb-6 max-w-2xl mx-auto text-white/65">
