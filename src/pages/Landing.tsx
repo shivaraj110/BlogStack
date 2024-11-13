@@ -25,7 +25,7 @@ function Landing() {
       </div>
       <div
         className={` h-full rounded-r-lg ${
-          !isMobile ? "-translate-x-48 h-1" : null
+          !isMobile ? "-translate-x-48 hidden" : null
         }  transi bg-white/45 backdrop-blur-md -translate-y-12 w-fit flex-col `}>
         <div
           onClick={() => {
@@ -112,7 +112,7 @@ function Landing() {
           {" "}
           <div className="container mx-auto px-4 h-fit text-center">
             {" "}
-            <h1 className="text-5xl font-bold transi mb-6 bg-gradient-to-r sm:h-16 h-32 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
+            <h1 className="text-5xl font-bold transi mb-6 bg-gradient-to-r sm:h-16 h-28 from-blue-600 via-blue-300 to-blue-600 text-transparent bg-clip-text">
               Welcome to BlogStack
             </h1>{" "}
             <p className="text-xl mb-6 max-w-2xl mx-auto text-white/65">
