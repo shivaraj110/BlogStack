@@ -1,5 +1,4 @@
 import Blogs from "../components/Blogs";
-import Appbar from "../components/Appbar";
 import { useBlogs } from "../hooks/useBlogs";
 import ResponsiveBlogLoadingSkeleton from "../components/ResponsiveBlogLoadingSkeleton";
 
@@ -8,7 +7,6 @@ function AllBlogs() {
   if (loading) {
     return (
       <div className="">
-        <Appbar />
         <div className="flex flex-col">
           <div className="">
             <ResponsiveBlogLoadingSkeleton />;
@@ -19,7 +17,6 @@ function AllBlogs() {
   } else {
     return (
       <div className=" p-1">
-        <Appbar />
         <div className="flex flex-col">
           <div className="mt-24">
             {blogs.map((b) => (

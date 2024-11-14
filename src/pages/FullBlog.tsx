@@ -11,7 +11,6 @@ function FullBlog() {
   if (loading) {
     return (
       <div className="">
-        <Appbar />
         <div className="flex flex-col">
           <ResponsiveBlogLoadingSkeleton />;
         </div>

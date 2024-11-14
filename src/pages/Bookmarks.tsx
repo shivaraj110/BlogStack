@@ -1,4 +1,3 @@
-import Appbar from "../components/Appbar";
 import { useBookmarks } from "../hooks/useBlogs";
 import ResponsiveBlogLoadingSkeleton from "../components/ResponsiveBlogLoadingSkeleton";
 import BookmarkBlog from "../components/BookmarkBlogs";
@@ -8,7 +7,6 @@ function Bookmarks() {
   if (loading) {
     return (
       <div className="">
-        <Appbar />
         <div className="flex flex-col">
           <div className="">
             <ResponsiveBlogLoadingSkeleton />;
@@ -19,7 +17,6 @@ function Bookmarks() {
   } else {
     return (
       <div className=" p-1">
-        <Appbar />
         <div className="flex flex-col">
           <div className="mt-24">
             {blogs.map((b) => (

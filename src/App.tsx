@@ -8,6 +8,7 @@ import FullBlog from "./pages/FullBlog";
 import { WriteBlog } from "./pages/WriteBlog";
 import Bookmarks from "./pages/Bookmarks";
 import ProtectRoutes from "./util/ProtectedRoutes";
+import Layout from "./components/Layout";
 function App() {
   return (
     <>
@@ -17,10 +18,33 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route element={<ProtectRoutes />}>
-            <Route path="/blog/:id" element={<FullBlog />} />
-            <Route path="/blogs" element={<AllBlogs />} />
+            <Route
+              path="/blog/:id"
+              element={
+                <Layout>
+                  <FullBlog />
+                </Layout>
+              }
+            />
+
+            <Route
+              path="/blogs"
+              element={
+                <Layout>
+                  <AllBlogs />
+                </Layout>
+              }
+            />
+
             <Route path="/WriteBlog" element={<WriteBlog />} />
-            <Route path="/bookmarks" element={<Bookmarks />} />
+            <Route
+              path="/bookmarks"
+              element={
+                <Layout>
+                  <Bookmarks />
+                </Layout>
+              }
+            />
           </Route>
         </Routes>
       </BrowserRouter>
