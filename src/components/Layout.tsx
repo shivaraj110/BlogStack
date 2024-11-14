@@ -6,7 +6,8 @@ import { ReactNode } from "react";
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div>
-      <Appbar />;{children}
+      <Appbar />
+      {children}
     </div>
   );
 }
