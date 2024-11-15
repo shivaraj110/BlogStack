@@ -90,7 +90,7 @@ function BlogPost({
               </span>
             ))}
           </div>
-          <div className="flex items-center justify-between text-sm text-gray-600 ">
+          <div className="flex sm:flex-row flex-col items-center justify-between text-sm text-gray-600 ">
             <div className="flex items-center space-x-4">
               <button
                 className={`flex items-center space-x-2 ${
