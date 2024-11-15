@@ -10,8 +10,10 @@ function Appbar() {
           <Link to={"/blogs"}>BlogStack</Link>
         </div>
         <div className="flex flex-row">
-          <div className=" flex mr-4 items-center hover:text-blue-500 hover:cursor-pointer">
-            <Link to={"/WriteBlog"}>
+          <div className=" flex mr-6 items-center hover:text-blue-500 hover:cursor-pointer">
+            <Link to={"/WriteBlog"} className="tooltip-container">
+            <span className="text">
+            <span className="tooltip">Add</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -25,10 +27,14 @@ function Appbar() {
                   d="M12 4.5v15m7.5-7.5h-15"
                 />
               </svg>
+              </span>
             </Link>
           </div>
-          <div className=" flex mr-4 items-center hover:text-blue-500 hover:cursor-pointer">
-            <Link to={"/bookmarks"}>
+          <div className=" flex mr-6 items-center hover:text-blue-500 hover:cursor-pointer">
+            <Link to={"/bookmarks"} className="tooltip-container">
+            
+        <span className="text">
+        <span className="tooltip">Bookmarks</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -42,19 +48,28 @@ function Appbar() {
                   d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0 1 20.25 6v12A2.25 2.25 0 0 1 18 20.25H6A2.25 2.25 0 0 1 3.75 18V6A2.25 2.25 0 0 1 6 3.75h1.5m9 0h-9"
                 />
               </svg>
+              </span>
             </Link>
           </div>
           <div
-            className="flex mr-4 items-center hover:text-blue-500 hover:cursor-pointer"
+            className="flex mr-6 items-center hover:text-blue-500 hover:cursor-pointer"
             onClick={() => {
               localStorage.clear();
             }}>
-            <Link to={"/login"}>
+            <Link to={"/login"} className="tooltip-container">
+            <span className="text">
+            <span className="tooltip">Logout</span>
               <LogOut />
+              </span>
             </Link>
           </div>
+          <div className="tooltip-container">
+          <span className="text">
+            <span className="tooltip">Profile</span>
           <div className=" bg-blue-500 text-white text-lg flex flex-col cursor-pointer poppins-regular self-center justify-center h-[30px] rounded-full w-[30px] text-center font-extralight">
             {username[0].toUpperCase()}
+          </div>
+          </span>
           </div>
         </div>
       </header>
