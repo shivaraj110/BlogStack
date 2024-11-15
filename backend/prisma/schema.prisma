@@ -20,7 +20,6 @@ model User {
   password  String
   posts     Post[]
   bookmarks Bookmark[]
-<<<<<<< HEAD
   pfpUrl    String?
   org       String?
   Title     String?
@@ -28,14 +27,6 @@ model User {
   lname     String?
   Comment   Comment[]
   Replies   Replies[]
-=======
-  connections Connections[]
-}
-
-model Connections{
-  id Int @id @default(autoincrement())
-  connections User[]
->>>>>>> 9f853c601b6dccb234ed2e282f953e9f1e4701bd
 }
 
 model Post {
