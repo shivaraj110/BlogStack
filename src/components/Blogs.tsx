@@ -87,8 +87,7 @@ function BlogPost({
             {tags.map((tag, index) => (
               <span
                 key={index}
-                className="text-xs bg-blue-100 text-blue-800 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200"
-              >
+                className="text-xs bg-blue-100 text-blue-800 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200">
                 #{tag}
               </span>
             ))}
@@ -99,8 +98,7 @@ function BlogPost({
                 className={`flex items-center space-x-2 ${
                   isLiked ? "text-red-500" : "hover:text-red-500"
                 } transition-colors duration-200`}
-                onClick={() => setIsLiked(!isLiked)}
-              >
+                onClick={() => setIsLiked(!isLiked)}>
                 <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
                 <span>10 Reactions</span>
               </button>
@@ -117,8 +115,7 @@ function BlogPost({
                 className={`${
                   isBookmarked ? "text-yellow-500" : "hover:text-yellow-500"
                 } transition-colors duration-200`}
-                onClick={isBookmarked ? handleBookmarkRemove : handleBookmark}
-              >
+                onClick={isBookmarked ? handleBookmarkRemove : handleBookmark}>
                 <Bookmark
                   className={`h-5 w-5 ${isBookmarked ? "fill-current" : ""}`}
                 />

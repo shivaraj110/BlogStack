@@ -9,6 +9,7 @@ import { WriteBlog } from "./pages/WriteBlog";
 import Bookmarks from "./pages/Bookmarks";
 import ProtectRoutes from "./util/ProtectedRoutes";
 import Layout from "./components/Layout";
+import Onboard from "./pages/Onboard";
 function App() {
   return (
     <>
@@ -35,7 +36,7 @@ function App() {
                 </Layout>
               }
             />
-
+            <Route path="/onboard" element={<Onboard />} />
             <Route path="/WriteBlog" element={<WriteBlog />} />
             <Route
               path="/bookmarks"

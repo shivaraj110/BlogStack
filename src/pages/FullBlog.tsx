@@ -1,4 +1,3 @@
-import Appbar from "../components/Appbar";
 import { useBlog } from "../hooks/useBlogs";
 import ResponsiveBlogLoadingSkeleton from "../components/ResponsiveBlogLoadingSkeleton";
 import { useParams } from "react-router-dom";
@@ -19,9 +18,6 @@ function FullBlog() {
   } else {
     return (
       <div>
-        <div className="">
-          <Appbar />
-        </div>
         <div className="flex flex-col">
           <div className="mt-10">
             <Blog
