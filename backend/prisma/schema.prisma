@@ -20,6 +20,13 @@ model User {
   password  String
   posts     Post[]
   bookmarks Bookmark[]
+  pfpUrl    String?
+  org       String?
+  Title     String?
+  fname     String?
+  lname     String?
+  Comment   Comment[]
+  Replies   Replies[]
 }
 
 model Post {
@@ -29,10 +36,13 @@ model Post {
   published   Boolean    @default(false)
   author      User       @relation(fields: [authorId], references: [id])
   authorId    Int
-  publishDate String?
+  publishDate String
   tags        String[]
   bookmarks   Bookmark[]
-  bookmarked Boolean @default(false)
+  bookmarked  Boolean    @default(false)
+  likes       Int
+  comments    String[]
+  imgUrl      String
 }
 
 model Bookmark {
@@ -42,4 +52,19 @@ model Bookmark {
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
   createdAt DateTime @default(now())
+}
+
+model Comment {
+  id      Int       @id @default(autoincrement())
+  user    User      @relation(fields: [userId], references: [id])
+  userId  Int
+  replies Replies[]
+}
+
+model Replies {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  Comment   Comment? @relation(fields: [commentId], references: [id])
+  commentId Int?
 }
