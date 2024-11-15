@@ -52,7 +52,8 @@ blogRouter.post('/', async(c) => {
                     content : body.content,
                     authorId : Number(c.get("authorId")),
                     tags : body.tags,
-                    publishDate : date + suffix + month + ", " + year
+                    publishDate : date + suffix + month + ", " + year,
+                    likes : 0
                 }
             })
             return c.json({
@@ -120,6 +121,7 @@ return c.json({
                 publishDate : true,
                 id : true,
                 tags : true,
+                likes:true,
                 author :{
                     select : {
                         name : true
@@ -156,6 +158,7 @@ return c.json({
               publishDate : true,
               id : true,
               tags : true,
+              likes : true,
               author :{
                   select : {
                       name : true
@@ -197,7 +200,8 @@ blogRouter.get('/:id', async (c) => {
                 select : {
                     name : true
                 }
-            }
+            },
+            likes:true
         }
     })
     return c.json({
