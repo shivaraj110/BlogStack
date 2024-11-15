@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import { backnedUrl } from "../config/url";
+import { Link } from "react-router-dom";
 
 export interface BlogData {
   authorName: string;
@@ -79,9 +80,11 @@ function BlogPost({
           </div>
         </div>
         <div className="md:pl-10">
-          <h1 className="text-2xl font-bold text-gray-900 mb-2 hover:text-blue-600  transition-colors duration-200">
-            {title}
-          </h1>
+          <Link to={`/blog/${id}`}>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2 hover:text-blue-600  cursor-pointer transition-colors duration-200">
+              {title}
+            </h1>
+          </Link>
           <div className="text-sm text-gray-600 mb-4">
             {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
           </div>
@@ -111,7 +114,7 @@ function BlogPost({
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-xs bg-gray-200  rounded-full px-2 py-1">
-                10 hours
+                {content.split(" ").length / 60 + " mins read"}
               </span>
               <button
                 className={`${
