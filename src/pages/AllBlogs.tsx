@@ -6,7 +6,7 @@ function AllBlogs() {
   const { loading, blogs } = useBlogs();
   if (loading) {
     return (
-      <div className="">
+      <div className="max-w-7xl mx-auto">
         <div className="flex flex-col">
           <div className="">
             <ResponsiveBlogLoadingSkeleton />;
@@ -16,9 +16,9 @@ function AllBlogs() {
     );
   } else {
     return (
-      <div className=" p-1">
+      <div className="p-1 max-w-7xl mx-auto">
         <div className="flex flex-col">
-          <div className="mt-24">
+          <div className="mt-20">
             {blogs.map((b) => (
               <Blogs
                 authorName={b.author.name || "Anonymous"}
