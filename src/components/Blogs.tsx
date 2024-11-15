@@ -9,6 +9,7 @@ export interface BlogData {
   content: string;
   publishDate: string;
   tags: string[];
+  likes: number;
   id: number;
 }
 
@@ -18,6 +19,7 @@ function BlogPost({
   content,
   publishDate,
   tags,
+  likes,
   id,
 }: BlogData) {
   const [isLiked, setIsLiked] = useState(false);
@@ -100,7 +102,7 @@ function BlogPost({
                 } transition-colors duration-200`}
                 onClick={() => setIsLiked(!isLiked)}>
                 <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
-                <span>10 Reactions</span>
+                <span>{likes} Reactions</span>
               </button>
               <button className="flex items-center space-x-2 hover:text-blue-500 transition-colors duration-200">
                 <MessageCircle className="h-5 w-5" />

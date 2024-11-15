@@ -27,6 +27,7 @@ function AllBlogs() {
                 tags={!b.tags ? ["notags"] : b.tags}
                 publishDate={b.publishDate ? b.publishDate : "no trace"}
                 id={b.id}
+                likes={b.likes}
               />
             ))}
           </div>

@@ -7,6 +7,7 @@ interface BlogData {
   publishDate?: string;
   id:number
   tags : string[]
+  likes : number
   author: {
     name: string;
   };
