@@ -77,9 +77,12 @@ function BlogPost({
           </div>
         </div>
         <div className="md:pl-10">
-          <h1 className="text-2xl font-bold text-gray-900 mb-3 hover:text-blue-600  transition-colors duration-200">
+          <h1 className="text-2xl font-bold text-gray-900 mb-2 hover:text-blue-600  transition-colors duration-200">
             {title}
           </h1>
+          <div className="text-sm text-gray-600 mb-4">
+            {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
+          </div>
           <div className="flex flex-wrap gap-2 mb-4">
             {tags.map((tag, index) => (
               <span
