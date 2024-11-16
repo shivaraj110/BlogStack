@@ -27,6 +27,7 @@ function FullBlog() {
               title={`${blog?.title}`}
               content={`${blog?.content}`}
               publishDate={blog?.publishDate ? blog.publishDate : "no trace"}
+              likes={blog?.likes}
             />
           </div>
         </div>

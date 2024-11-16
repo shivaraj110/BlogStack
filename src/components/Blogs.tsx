@@ -10,7 +10,7 @@ export interface BlogData {
   content: string;
   publishDate: string;
   tags: string[];
-  likes: number;
+  likes?: number;
   id: number;
 }
 
