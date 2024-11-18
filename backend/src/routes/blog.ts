@@ -122,6 +122,7 @@ return c.json({
                 id : true,
                 tags : true,
                 likes:true,
+                imgUrl : true,
                 author :{
                     select : {
                         name : true
@@ -159,6 +160,7 @@ return c.json({
               id : true,
               tags : true,
               likes : true,
+              imgUrl:true,
               author :{
                   select : {
                       name : true
@@ -196,6 +198,7 @@ blogRouter.get('/:id', async (c) => {
             publishDate : true,
             id : true,
             tags : true,
+            imgUrl : true,
             author :{
                 select : {
                     name : true

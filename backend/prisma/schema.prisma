@@ -41,7 +41,7 @@ model Post {
   bookmarks   Bookmark[]
   bookmarked  Boolean    @default(false)
   likes       Int
-  comments    String[]
+  comments    Comment[]
   imgUrl      String
 }
 
@@ -58,7 +58,10 @@ model Comment {
   id      Int       @id @default(autoincrement())
   user    User      @relation(fields: [userId], references: [id])
   userId  Int
+  comment String
   replies Replies[]
+  Post    Post?     @relation(fields: [postId], references: [id])
+  postId  Int?
 }
 
 model Replies {
