@@ -114,7 +114,7 @@ function BlogPost({
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-xs bg-gray-200  rounded-full px-2 py-1">
-                {content.split(" ").length / 60 + " mins read"}
+                {Math.floor(content.split(" ").length / 60) + " mins read"}
               </span>
               <button
                 className={`${
