@@ -53,7 +53,8 @@ blogRouter.post('/', async(c) => {
                     authorId : Number(c.get("authorId")),
                     tags : body.tags,
                     publishDate : date + suffix + month + ", " + year,
-                    likes : 0
+                    likes : 0,
+                    imgUrl : "asdsad"
                 }
             })
             return c.json({
@@ -68,6 +69,8 @@ blogRouter.post('/', async(c) => {
 
     }
     catch(e){
+        console.log(e);
+        
         c.status(413)
        return c.json({
             msg  : "error while posting the blog!"
