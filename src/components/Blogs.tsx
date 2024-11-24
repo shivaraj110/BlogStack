@@ -25,9 +25,10 @@ function BlogPost({
 }: BlogData) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
-
+  const [showPopup, setshowPopup] = useState(false);
   const handleBookmark = async () => {
-    setIsBookmarked(!isBookmarked);
+    setIsBookmarked(true);
+    setshowPopup(true);
     try {
       const res = await axios.post(
         `${backnedUrl}/api/v1/user/bookmark`,
@@ -39,15 +40,17 @@ function BlogPost({
           },
         }
       );
-      alert(res.data.msg);
+      setshowPopup(false);
+      console.log(res.data.msg);
     } catch (error) {
+      setshowPopup(false);
       console.error("Error bookmarking post:", error);
-      alert("Failed to bookmark post");
     }
   };
 
   const handleBookmarkRemove = async () => {
-    setIsBookmarked(!isBookmarked);
+    setIsBookmarked(false);
+    setshowPopup(true);
     try {
       const res = await axios.delete(`${backnedUrl}/api/v1/user/bookmark`, {
         data: { id },
@@ -56,10 +59,11 @@ function BlogPost({
           "Content-Type": "application/json",
         },
       });
-      alert(res.data.msg);
+      setshowPopup(false);
+      console.log(res.data.msg);
     } catch (error) {
       console.error("Error removing bookmark:", error);
-      alert("Failed to remove bookmark");
+      console.log(error);
     }
   };
 
@@ -88,14 +92,26 @@ function BlogPost({
           <div className="text-sm text-gray-600 mb-4">
             {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
           </div>
-          <div className="flex flex-wrap gap-2 mb-4">
-            {tags.map((tag, index) => (
-              <span
-                key={index}
-                className="text-xs bg-blue-100 text-blue-800 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200">
-                #{tag}
-              </span>
-            ))}
+          <div className="flex flex-wrap justify-between mb-4">
+            <div className="flex flex-wrap gap-2">
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="text-xs bg-blue-100 text-blue-800 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+            <div
+              className={`text-gray-500 transi p-2 rounded-lg text-sm ${
+                showPopup
+                  ? "size-fit bg-slate-100"
+                  : "size-0 overflow-hidden bg-transparent "
+              } `}>
+              {!isBookmarked
+                ? "removed the bookmark"
+                : "added to the bookmarks!"}
+            </div>
           </div>
           <div className="flex sm:flex-row flex-col items-center justify-between text-sm text-gray-600 ">
             <div className="flex items-center space-x-4">
@@ -120,7 +136,9 @@ function BlogPost({
                 className={`${
                   isBookmarked ? "text-yellow-500" : "hover:text-yellow-500"
                 } transition-colors duration-200`}
-                onClick={isBookmarked ? handleBookmarkRemove : handleBookmark}>
+                onClick={() => {
+                  isBookmarked ? handleBookmarkRemove() : handleBookmark();
+                }}>
                 <Bookmark
                   className={`h-5 w-5 ${isBookmarked ? "fill-current" : ""}`}
                 />
