@@ -40,17 +40,18 @@ function BlogPost({
           },
         }
       );
-      setshowPopup(false);
+      setTimeout(() => {
+        setshowPopup(false);
+      }, 1000);
       console.log(res.data.msg);
     } catch (error) {
-      setshowPopup(false);
       console.error("Error bookmarking post:", error);
     }
   };
 
   const handleBookmarkRemove = async () => {
-    setIsBookmarked(false);
     setshowPopup(true);
+    setIsBookmarked(false);
     try {
       const res = await axios.delete(`${backnedUrl}/api/v1/user/bookmark`, {
         data: { id },
@@ -59,11 +60,12 @@ function BlogPost({
           "Content-Type": "application/json",
         },
       });
-      setshowPopup(false);
+      setTimeout(() => {
+        setshowPopup(false);
+      }, 1000);
       console.log(res.data.msg);
     } catch (error) {
       console.error("Error removing bookmark:", error);
-      console.log(error);
     }
   };
 
@@ -78,7 +80,7 @@ function BlogPost({
           />
           <div>
             <h2 className="text-base font-medium text-gray-600 ">
-              {authorName ?? "Anonymous"}
+              {authorName}
             </h2>
             <p className="text-xs text-gray-500">{publishDate}</p>
           </div>
@@ -136,9 +138,7 @@ function BlogPost({
                 className={`${
                   isBookmarked ? "text-yellow-500" : "hover:text-yellow-500"
                 } transition-colors duration-200`}
-                onClick={() => {
-                  isBookmarked ? handleBookmarkRemove() : handleBookmark();
-                }}>
+                onClick={isBookmarked ? handleBookmarkRemove : handleBookmark}>
                 <Bookmark
                   className={`h-5 w-5 ${isBookmarked ? "fill-current" : ""}`}
                 />

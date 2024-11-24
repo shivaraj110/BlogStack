@@ -12,7 +12,7 @@ export const useUsername = () => {
                     "Content-Type" : "application/json"
                 }
             }
-        ).then(res => setUserName(res.data.details.name))
+        ).then(res => setUserName(res.data.details.name ?? "Anonymous"))
     })
     return userName
 }
