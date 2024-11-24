@@ -70,7 +70,6 @@ blogRouter.post('/', async(c) => {
     }
     catch(e){
         console.log(e);
-        
         c.status(413)
        return c.json({
             msg  : "error while posting the blog!"

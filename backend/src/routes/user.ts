@@ -68,6 +68,7 @@ userRouter.post('/signup',async (c) => {
       })
     }
    else{
+
     c.status(400)
     return c.json({
       msg : "invalid inputs!"
@@ -76,6 +77,7 @@ userRouter.post('/signup',async (c) => {
   }
   catch(e){
     c.status(413)
+    console.log(e);
     return c.json({
       msg : "something went wrong! try again!"
     })
@@ -120,6 +122,8 @@ userRouter.post('/signup',async (c) => {
   }
   catch(e){
     c.status(411)
+    console.log(e);
+  
     return c.json({
       msg : "error while signing in!"
     })
@@ -178,6 +182,7 @@ try{
     }
   }
 )
+c.status(200)
 return c.json({
   msg : "added to the bookmarks",
   res
