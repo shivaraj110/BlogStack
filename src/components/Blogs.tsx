@@ -78,7 +78,7 @@ function BlogPost({
           />
           <div>
             <h2 className="text-base font-medium text-gray-600 ">
-              {authorName}
+              {authorName ?? "Anonymous"}
             </h2>
             <p className="text-xs text-gray-500">{publishDate}</p>
           </div>
