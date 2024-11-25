@@ -129,7 +129,8 @@ return c.json({
                     select : {
                         name : true
                     }
-                }
+                },
+                bookmarks : true
             }
           })
           return c.json({
@@ -167,7 +168,8 @@ return c.json({
                   select : {
                       name : true
                   }
-              }
+              },
+              bookmarks : true
           }
         })
         return c.json({
@@ -206,7 +208,8 @@ blogRouter.get('/:id', async (c) => {
                     name : true
                 }
             },
-            likes:true
+            likes:true,
+            bookmarks : true
         }
     })
     return c.json({
