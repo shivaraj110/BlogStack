@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUsername } from "../hooks/useUsername";
 import { LogOut } from "lucide-react";
 function Appbar() {
   const username = useUsername();
+  const nav = useNavigate();
   return (
     <div className="fixed z-40 selection w-full ">
       <header className="flex z-20 justify-between p-4 mt-3 items-center bg-blue-50 shadow-md rounded-3xl box-border mx-12 transi md:mx-32">
@@ -54,11 +55,16 @@ function Appbar() {
             className="flex mr-6 items-center hover:text-blue-500 hover:cursor-pointer"
             onClick={() => {
               localStorage.clear();
+              window.location.reload();
             }}>
             <Link to={"/login"} className="tooltip-container">
               <span className="text">
                 <span className="tooltip">Logout</span>
-                <LogOut />
+                <LogOut
+                  onClick={() => {
+                    nav("/login");
+                  }}
+                />
               </span>
             </Link>
           </div>
