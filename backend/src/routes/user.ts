@@ -153,7 +153,8 @@ const res = await prisma.user.findFirst({
   select : {
     name : true,
     email : true,
-    id : true
+    id : true,
+    bookmarks : true
   }
 })
 return c.json({
