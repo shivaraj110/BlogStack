@@ -12,8 +12,14 @@ export interface BlogData {
   tags: string[];
   likes?: number;
   id: number;
+  bookmarks: bookmarks[];
 }
 
+interface bookmarks {
+  id: number;
+  postId: number;
+  userId: number;
+}
 function BlogPost({
   authorName,
   title,

@@ -11,6 +11,13 @@ interface BlogData {
   author: {
     name: string;
   };
+  bookmarks : bookmarks[]
+}
+
+interface bookmarks{
+  id : number
+  postId : number
+  userId : number
 }
 export const useBlogs = () => {
   const [loading, setLoading] = useState(true);

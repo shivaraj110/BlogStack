@@ -28,6 +28,7 @@ function AllBlogs() {
                 publishDate={b.publishDate ? b.publishDate : "no trace"}
                 id={b.id}
                 likes={b.likes}
+                bookmarks={b.bookmarks}
               />
             ))}
           </div>
