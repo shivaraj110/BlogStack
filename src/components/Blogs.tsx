@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import { backnedUrl } from "../config/url";
@@ -29,7 +29,6 @@ function BlogPost({
   const userBookmarks = useBookmarks();
   const checkBookmarks = () => {
     userBookmarks.blogs.map((b) => {
-      console.log(b.post.id + " " + id);
       if (b.post.id === id) {
         setIsBookmarked(true);
         return;
