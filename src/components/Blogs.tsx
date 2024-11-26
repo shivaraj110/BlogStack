@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import axios from "axios";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
 import { backnedUrl } from "../config/url";
 import { Link } from "react-router-dom";
-
+import { useBookmarks } from "../hooks/useBlogs";
 export interface BlogData {
   authorName: string;
   title: string;
@@ -12,14 +12,8 @@ export interface BlogData {
   tags: string[];
   likes?: number;
   id: number;
-  bookmarks: bookmarks[];
 }
 
-interface bookmarks {
-  id: number;
-  postId: number;
-  userId: number;
-}
 function BlogPost({
   authorName,
   title,
@@ -32,6 +26,21 @@ function BlogPost({
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showPopup, setshowPopup] = useState(false);
+  const userBookmarks = useBookmarks();
+  const checkBookmarks = () => {
+    userBookmarks.blogs.map((b) => {
+      console.log(b.post.id + " " + id);
+      if (b.post.id === id) {
+        setIsBookmarked(true);
+        return;
+      }
+    });
+  };
+
+  useEffect(() => {
+    checkBookmarks();
+  }, [userBookmarks]);
+
   const handleBookmark = async () => {
     setIsBookmarked(true);
     setshowPopup(true);
@@ -56,8 +65,8 @@ function BlogPost({
   };
 
   const handleBookmarkRemove = async () => {
-    setshowPopup(true);
     setIsBookmarked(false);
+    setshowPopup(true);
     try {
       const res = await axios.delete(`${backnedUrl}/api/v1/user/bookmark`, {
         data: { id },
@@ -110,15 +119,16 @@ function BlogPost({
                 </span>
               ))}
             </div>
+
             <div
               className={`text-gray-500 transi p-2 rounded-lg text-sm ${
                 showPopup
                   ? "size-fit bg-slate-100"
                   : "size-0 overflow-hidden bg-transparent "
               } `}>
-              {!isBookmarked
-                ? "removed the bookmark"
-                : "added to the bookmarks!"}
+              {isBookmarked
+                ? "added to the bookmarks!"
+                : "removed the bookmark"}
             </div>
           </div>
           <div className="flex sm:flex-row flex-col items-center justify-between text-sm text-gray-600 ">
@@ -146,7 +156,9 @@ function BlogPost({
                 } transition-colors duration-200`}
                 onClick={isBookmarked ? handleBookmarkRemove : handleBookmark}>
                 <Bookmark
-                  className={`h-5 w-5 ${isBookmarked ? "fill-current" : ""}`}
+                  className={`h-5 w-5 ${
+                    isBookmarked ? "fill-current" : "fill-none"
+                  }`}
                 />
               </button>
               <button className="hover:text-green-500 transition-colors duration-200">

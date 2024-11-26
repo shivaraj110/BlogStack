@@ -16,18 +16,3 @@ export const useUsername = () => {
     })
     return userName
 }
-
-export const useUserBookmarks = () => {
-    const [userName,setUserName] = useState([])
-    useEffect(()=>{
-        axios.get(`${backnedUrl}/api/v1/user/details`,
-            {
-                headers : {
-                    Authorization :  "Bearer " + localStorage.getItem("token"),
-                    "Content-Type" : "application/json"
-                }
-            }
-        ).then(res => setUserName(res.data.details.bookmarks ?? "Anonymous"))
-    })
-    return userName
-}

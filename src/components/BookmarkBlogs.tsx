@@ -2,8 +2,17 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { backnedUrl } from "../config/url";
-import { BlogData } from "./Blogs";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
+
+interface BlogData {
+  authorName: string;
+  title: string;
+  content: string;
+  publishDate: string;
+  tags: string[];
+  likes?: number;
+  id: number;
+}
 
 function BookmarkBlogs({
   authorName,
