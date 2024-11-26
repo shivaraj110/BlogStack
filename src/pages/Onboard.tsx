@@ -1,75 +1,98 @@
+import { useState } from "react";
+
 export default function Onboard() {
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [step, setStep] = useState(1);
+  const [designation, setDesignation] = useState("");
   return (
-    <div className="flex flex-col">
-      <h1 className="text-5xl font-bold  bg-gradient-to-r h-14 poppins-medium from-blue-500 via-blue-100 to-blue-500 text-transparent bg-clip-text mt-3 ml-64">
-        BlogStack
-      </h1>{" "}
-      <div className=" text-xl poppins-light ml-64">
-        Complete providing your informantion for enhancing your experience.
+    <div className="flex flex-col ">
+      <div className=" flex px-28 bg-blue-200  ">
+        <img
+          src="../../public/logo.png"
+          alt="logo"
+          className=" h-[80px]  mt-2 "
+        />
       </div>
-      <div className="border w-[900px] ml-64 rounded-lg mt-5 h-[500px] ">
-        <div className="">
-          <div className="p-10 poppins-semibold text-2xl text-gray-600">
-            About You
+      <div className="bg-blue-200 w-screen">
+        <div className="flex flex-col w-96 mx-auto text-center pt-5 pb-48 text-gray-600">
+          <h3 className="text-3xl font-semibold">Welcome to BlogStack!</h3>
+          <p className="text-xl">
+            Enhance your experience for blogging around with fun! Start by
+            filling out the info we need.
+          </p>
+        </div>
+      </div>
+      <div className="bg-white/75 backdrop-blur-sm w-[700px] rounded-xl -translate-y-36 h-96 mx-auto flex ">
+        <div className="bg-blue-400 backdrop-blur-sm p-10 rounded-l-lg">
+          <div
+            className={` p-2 px-3 text-gray-600 backdrop-blur-sm ${
+              step === 1 ? "bg-white/75" : "bg-white/50"
+            } rounded-xl border size-fit transi  `}>
+            Personal Information
           </div>
-          <div className="flex justify-around">
-            <div className="">
-              <div className=" poppins-semibold text-xl text-gray-600">
-                Personal Info
+          <div
+            className={`w-[2px] h-[60px]  ${
+              step === 2 ? "bg-blue-500" : "bg-transparent"
+            } transi translate-x-24 `}></div>
+          <div
+            className={` p-2 px-[40px] text-gray-600 transi backdrop-blur-sm ${
+              step === 2 ? "bg-white/75" : "bg-white/50"
+            } rounded-xl border size-fit poppins  `}>
+            Personilization
+          </div>
+        </div>
+        <div className="p-10">
+          {step == 1 ? (
+            <div>
+              <div className="py-2">
+                <label className="text-gray-600" htmlFor="">
+                  <div className="font-semibold">First Name</div>
+                  <input
+                    onChange={(e) => {
+                      setFname(e.target.value);
+                    }}
+                    type="text"
+                    className="outline-none border-b-2 bg-transparent "
+                  />
+                </label>{" "}
               </div>
-              <div className=" poppins-light text-sm">
-                Provide your personal info
+              <div className="py-5">
+                <label className="text-gray-600" htmlFor="">
+                  <div className="font-semibold">Last Name</div>
+                  <input
+                    onChange={(e) => {
+                      setLname(e.target.value);
+                    }}
+                    type="text"
+                    className="outline-none border-b-2 bg-transparent "
+                  />
+                </label>{" "}
+                <div className="py-5">
+                  <label className="text-gray-600" htmlFor="">
+                    <div className="font-semibold">Designation</div>
+                    <input
+                      type="text"
+                      className="outline-none placeholder:text-sm border-b-2 bg-transparent "
+                      placeholder="eg- Developer,Proffessor"
+                    />
+                  </label>
+                </div>
+                <div className="flex justify-end pt-[100px]">
+                  <button
+                    onClick={() => {
+                      setStep(step + 1);
+                    }}
+                    className="bg-blue-400 w-[125px] p-1 translate-x-[70px] text-gray-700 rounded-lg">
+                    {" "}
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
-            <div className=" pr-10 ">
-              <div className="w-[410px] pl-3 h-fit bg-gray-100 rounded-md">
-                <div className="text-gray-500 pt-1 poppins-light">
-                  Organization
-                </div>
-                <input
-                  type="text"
-                  className=" outline-none w-full text-gray-600 bg-transparent"
-                />
-              </div>
-              <div className="flex gap-2">
-                <div className="mt-5">
-                  <div className="w-fit h-fit bg-gray-100 rounded-md">
-                    <div className="px-5 text-sm poppins-light  text-gray-500">
-                      Title*
-                    </div>
-                    <select
-                      name="Title"
-                      id="Title"
-                      className="px-5 pb-1 mr-2 text-gray-700 bg-gray-100 poppins-light cursor-pointer">
-                      <option value="Mr">Mr</option>
-                      <option value="Ms">Ms</option>
-                      <option value="Dr">Dr</option>
-                      <option value="Prof">Prof</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="w-[150px] pl-3 h-fit bg-gray-100 mt-5 rounded-md">
-                  <div className="text-gray-500 text-sm poppins-light">
-                    First Name*
-                  </div>
-                  <input
-                    type="text"
-                    className=" outline-none w-full pb-1 text-gray-600 bg-transparent"
-                  />
-                </div>{" "}
-                <div className="w-[150px] pl-3 h-fit bg-gray-100 mt-5 rounded-md">
-                  <div className="text-gray-500 text-sm poppins-light">
-                    Last Name*
-                  </div>
-                  <input
-                    type="text"
-                    className=" outline-none w-full pb-1 text-gray-600 bg-transparent"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-gray-400 mt-10 w-[81%] mx-16 h-[1px] "></div>
+          ) : (
+            <div>step 2</div>
+          )}
         </div>
       </div>
     </div>
