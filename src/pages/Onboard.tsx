@@ -1,3 +1,12 @@
+import {
+  ArrowLeft,
+  Code,
+  GraduationCap,
+  Group,
+  GroupIcon,
+  LucideGroup,
+  Microscope,
+} from "lucide-react";
 import { useState } from "react";
 
 export default function Onboard() {
@@ -90,16 +99,55 @@ export default function Onboard() {
                     {" "}
                     Next
                   </button>
-                  {step > 1 ? (
-                    <div>
-                      <button className="bg-blue-500">back</button>
-                    </div>
-                  ) : null}
                 </div>
               </div>
             </div>
           ) : (
-            <div>step 2</div>
+            <div className="">
+              {step > 1 ? (
+                <div>
+                  <ArrowLeft
+                    className="text-gray-600 cursor-pointer"
+                    onClick={() => {
+                      setStep(step - 1);
+                    }}
+                  />
+                </div>
+              ) : null}
+              <div className="text-gray-600 font-semibold p-2">
+                Choose your Profession
+              </div>
+              <div className="flex gap-4">
+                <div className="bg-white/80 flex justify-center shadow-xl gap-3  flex-col py-5 w-fit px-10 rounded-lg border cursor-pointer text-blue-500">
+                  <GraduationCap className="mx-auto" />
+                  <p className="">Student</p>
+                </div>
+                <div className="bg-white/80 flex justify-center shadow-xl  gap-3 flex-col py-5 w-fit px-[30px] rounded-lg border cursor-pointer text-blue-500">
+                  <Code className="mx-auto" />
+                  <p className="">Developer</p>
+                </div>
+              </div>{" "}
+              <div className="flex gap-4 pt-5">
+                <div className="bg-white/80 flex justify-center shadow-xl  gap-3  flex-col py-5 w-fit px-[25px] rounded-lg border cursor-pointer text-blue-500">
+                  <Microscope className="mx-auto" />
+                  <p className="">Researcher</p>
+                </div>
+                <div className="bg-white/80 flex justify-center shadow-xl gap-3 flex-col py-5 w-fit px-[50px] rounded-lg border cursor-pointer text-blue-500">
+                  <LucideGroup className="mx-auto" />
+                  <p className="">Other</p>
+                </div>
+              </div>
+              <div className=" flex justify-end pt-[40.5px]">
+                <button
+                  onClick={() => {
+                    setStep(step + 1);
+                  }}
+                  className="bg-blue-400 w-[125px] p-1 translate-x-[41px] text-gray-700 rounded-lg">
+                  {" "}
+                  Next
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>
