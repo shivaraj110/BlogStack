@@ -4,7 +4,6 @@ import {
   GraduationCap,
   LucideGroup,
   Microscope,
-  Pen,
   PenBoxIcon,
 } from "lucide-react";
 import { useState } from "react";
@@ -35,8 +34,8 @@ export default function Onboard() {
           </p>
         </div>
       </div>
-      <div className="bg-white/75 backdrop-blur-sm w-[700px] rounded-xl -translate-y-36 h-96 mx-auto flex ">
-        <div className="bg-blue-400 backdrop-blur-sm p-10 rounded-l-lg">
+      <div className="bg-white/75 backdrop-blur-sm w-[700px] rounded-xl shadow-xl -translate-y-36 h-96 mx-auto flex ">
+        <div className="bg-blue-400 backdrop-blur-sm p-10 rounded-l-lg shadow-xl">
           <div
             className={` p-2 px-[25px] text-gray-600 backdrop-blur-sm ${
               step === 1 ? "bg-white/75" : "bg-white/50"
@@ -116,12 +115,12 @@ export default function Onboard() {
                     </select>
                   </label>
                 </div>
-                <div className="flex justify-end pt-[90px]">
+                <div className="flex justify-end pt-[88px]">
                   <button
                     onClick={() => {
                       setStep(step + 1);
                     }}
-                    className="bg-blue-400 w-[125px] p-1 translate-x-[45px] text-gray-700 rounded-lg">
+                    className="bg-blue-50 hover:bg-blue-200 w-[125px] p-1 translate-x-[46px] border border-blue-400 text-blue-600 rounded-lg">
                     {" "}
                     Next
                   </button>
@@ -184,7 +183,7 @@ export default function Onboard() {
                   onClick={() => {
                     setStep(step + 1);
                   }}
-                  className="bg-blue-400 w-[125px] p-1 translate-x-[41px] text-gray-700 rounded-lg">
+                  className="bg-blue-50 backdrop-blur-sm border  border-blue-400 hover:bg-blue-200    w-[125px] p-1 translate-x-[41px] text-blue-500 rounded-lg ">
                   {" "}
                   Next
                 </button>
