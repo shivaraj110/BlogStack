@@ -26,20 +26,20 @@ export default function Onboard() {
       <div className="bg-white/75 backdrop-blur-sm w-[700px] rounded-xl -translate-y-36 h-96 mx-auto flex ">
         <div className="bg-blue-400 backdrop-blur-sm p-10 rounded-l-lg">
           <div
-            className={` p-2 px-3 text-gray-600 backdrop-blur-sm ${
+            className={` p-2 px-[25px] text-gray-600 backdrop-blur-sm ${
               step === 1 ? "bg-white/75" : "bg-white/50"
             } rounded-xl border size-fit transi  `}>
             Personal Information
           </div>
           <div
-            className={`w-[2px] h-[60px]  ${
+            className={`w-[2px] h-[60px] mx-auto  ${
               step === 2 ? "bg-blue-500" : "bg-transparent"
-            } transi translate-x-24 `}></div>
+            } transi `}></div>
           <div
-            className={` p-2 px-[40px] text-gray-600 transi backdrop-blur-sm ${
+            className={` p-2 px-3 text-gray-600 transi backdrop-blur-sm ${
               step === 2 ? "bg-white/75" : "bg-white/50"
             } rounded-xl border size-fit poppins  `}>
-            Personilization
+            Professional Information
           </div>
         </div>
         <div className="p-10">
@@ -53,7 +53,7 @@ export default function Onboard() {
                       setFname(e.target.value);
                     }}
                     type="text"
-                    className="outline-none border-b-2 bg-transparent "
+                    className="outline-none border-b bg-transparent "
                   />
                 </label>{" "}
               </div>
@@ -65,28 +65,36 @@ export default function Onboard() {
                       setLname(e.target.value);
                     }}
                     type="text"
-                    className="outline-none border-b-2 bg-transparent "
+                    className="outline-none border-b bg-transparent "
                   />
                 </label>{" "}
                 <div className="py-5">
                   <label className="text-gray-600" htmlFor="">
-                    <div className="font-semibold">Designation</div>
-                    <input
-                      type="text"
-                      className="outline-none placeholder:text-sm border-b-2 bg-transparent "
-                      placeholder="eg- Developer,Proffessor"
-                    />
+                    <div className="font-semibold">Title</div>
+                    <select
+                      name="title"
+                      id=""
+                      className="w-[300px] text-gray-500 font-semibold rounded-lg p-1 mt-2">
+                      <option value="Dr">Dr</option>
+                      <option value="Mr">Mr</option>
+                      <option value="Ms">Ms</option>
+                    </select>
                   </label>
                 </div>
-                <div className="flex justify-end pt-[100px]">
+                <div className="flex justify-end pt-[90px]">
                   <button
                     onClick={() => {
                       setStep(step + 1);
                     }}
-                    className="bg-blue-400 w-[125px] p-1 translate-x-[70px] text-gray-700 rounded-lg">
+                    className="bg-blue-400 w-[125px] p-1 translate-x-[45px] text-gray-700 rounded-lg">
                     {" "}
                     Next
                   </button>
+                  {step > 1 ? (
+                    <div>
+                      <button className="bg-blue-500">back</button>
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>
