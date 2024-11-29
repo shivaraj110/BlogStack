@@ -14,12 +14,12 @@ export const blogRouter = new Hono<{
     }
 }>();
 
-blogRouter.use('/*',async(c,next)=> {
+const verifyUser = async(c : any,next : any)=> {
     const header = c.req.header("authorization") || ""
     const token = header.split(" ")[1]
     const value  = await verify(token,c.env.JWT_SECRET)
     if(value.id){ 
-        c.set("authorId",String(value.id))
+        c.set("authoId",String(value.id))
         await next() 
     }
     else{
@@ -28,10 +28,10 @@ blogRouter.use('/*',async(c,next)=> {
       msg : " you are not logged in! "
     })
   }
-  })
+  }
 
 
-blogRouter.post('/', async(c) => {
+blogRouter.post('/',verifyUser,async(c) => {
     const body = await c.req.json()
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
@@ -80,7 +80,7 @@ blogRouter.post('/', async(c) => {
 })
   
   
-blogRouter.put('/', async(c) => {
+blogRouter.put('/', verifyUser,async(c) => {
     const body = await c.req.json()
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
@@ -146,7 +146,7 @@ return c.json({
   
   })
   
-  blogRouter.get('/', async(c) => {
+  blogRouter.get('/',verifyUser, async(c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL,
     }).$extends(withAccelerate())

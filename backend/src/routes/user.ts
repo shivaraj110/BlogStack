@@ -3,7 +3,6 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { decode,jwt,sign,verify } from 'hono/jwt';
 import { createBlogPost, CreateBlogPost, signinInput, signupInput } from "@shivaraj0110/medium-common"
-import { ArrowDownAZ } from "lucide-react";
 
 export const userRouter = new Hono<{
 	Bindings: {
