@@ -7,9 +7,9 @@ function Landing() {
   const [isMobile, setIsMobile] = useState(false);
   const { blogs } = useBlogs();
   let featuredBlogs = [];
+  featuredBlogs.push(blogs[1]);
   featuredBlogs.push(blogs[2]);
-  featuredBlogs.push(blogs[5]);
-  featuredBlogs.push(blogs[6]);
+  featuredBlogs.push(blogs[3]);
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-blue-800">
       <div
