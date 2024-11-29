@@ -1,20 +1,51 @@
-import { Link } from "react-router-dom";
+import { Link, LoaderFunction } from "react-router-dom";
 import { useState } from "react";
 import { BookOpen, Pencil, Users } from "lucide-react";
+import axios from "axios";
+import { backendUrl } from "~/lib/url";
+import { useLoaderData } from "@remix-run/react";
 
-function Landing() {
-  const [isMobile, setIsMobile] = useState(false);
-  let featuredBlogs = [
+export const loader: LoaderFunction = async () => {
+  const res = await axios.get(`${backendUrl}/api/v1/blog/bulk`);
+
+  const blogs: {
+    id: number;
+    title: string;
+    content: string;
+    author: {
+      name: string;
+    };
+    publishDate: string;
+  }[] = res.data.blogs ?? [
     {
       id: 1,
-      title: "title 1",
-      content: "asdasdasd",
+      title: "featured blog",
+      content: "content of featured blog",
       author: {
-        name: "dada",
+        name: "John",
       },
-      publishDate: "69/69/6699",
+      publishDate: "12/12/2023",
     },
   ];
+
+  return blogs;
+};
+
+function Landing() {
+  interface BlogType {
+    id: number;
+    title: string;
+    content: string;
+    author: {
+      name: string;
+    };
+    publishDate: string;
+  }
+
+  const [isMobile, setIsMobile] = useState(false);
+  const blogs: BlogType[] = useLoaderData<typeof loader>();
+
+  let featuredBlogs = [blogs[0], blogs[1], blogs[2]];
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-blue-800">
       <div
