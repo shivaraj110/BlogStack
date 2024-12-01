@@ -4,7 +4,7 @@ export function ProfileCard() {
   const { user } = useUser();
 
   return (
-    <div className="bg-white/60 backdrop-brightness-110 backdrop-blur-sm rounded-xl shadow-md mb-6">
+    <div className="bg-white/60 backdrop-brightness-110 backdrop-blur-sm rounded-xl shadow-md mb-6 h-fit">
       <div className="flex items-center justify-between p-6 border-b">
         <h2 className="text-xl font-semibold">My profile</h2>
       </div>
@@ -15,9 +15,6 @@ export function ProfileCard() {
             alt="Profile"
             className="w-full aspect-square object-cover rounded-xl"
           />
-          <button className="w-full py-2 px-4 bg-gradient-to-r from-blue-400 to-cyan-200 text-white rounded-lg hover:opacity-90 transition-opacity">
-            Save
-          </button>
         </div>
         <div className="space-y-4">
           <div>

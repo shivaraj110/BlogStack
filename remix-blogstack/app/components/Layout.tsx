@@ -14,7 +14,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className=" flex bg-[url('https://utfs.io/f/fVvo0hHNtQOLKvFnGkAktoYbLERVl8iTe2GWyCS4aBmqwrc7')]  bg-no-repeat bg-cover md:h-full 2xl:h-screen w-screen ">
       <div className="container mx-auto p-5">
-        <div className="bg-white/50  rounded-3xl backdrop-blur-sm  shadow-xl flex">
+        <div className="bg-white/50  rounded-3xl backdrop-blur-sm shadow-xl flex">
           {/* Sidebar */}
           <aside className="w-64 p-5">
             <div className="flex items-center gap-2 mb-8">
