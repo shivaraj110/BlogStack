@@ -9,7 +9,7 @@ import {
 } from "@remix-run/react";
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 // Import ClerkApp
-import { ClerkApp } from "@clerk/remix";
+import { ClerkApp, useUser } from "@clerk/remix";
 
 export const meta: MetaFunction = () => [
   {
@@ -19,8 +19,17 @@ export const meta: MetaFunction = () => [
   },
 ];
 
-export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+// Your imports
 
+export const loader: LoaderFunction = (args) => {
+  return rootAuthLoader(args, ({ request }) => {
+    const { sessionId, userId, getToken } = request.auth;
+    // Add logic to fetch data
+    return { userId };
+  });
+};
+
+// Your additional app code
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

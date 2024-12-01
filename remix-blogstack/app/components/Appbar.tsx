@@ -1,27 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LogOut } from "lucide-react";
-import { backendUrl } from "~/lib/url";
-import axios from "axios";
 import { useLoaderData } from "@remix-run/react";
-import { LoaderFunction } from "@remix-run/node";
-
-export const loader: LoaderFunction = async () => {
-  try {
-    const res = await axios.get(backendUrl + `/api/v1/user/details`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-        "Content-Type": "application/json",
-      },
-    });
-
-    return res.data.details.name ?? "Anonymous";
-  } catch (e) {
-    console.log("error : " + e);
-  }
-};
+import { SignOutButton, UserButton, useUser } from "@clerk/remix";
 
 function Appbar() {
-  const username = useLoaderData<typeof loader>();
+  const { isLoaded, isSignedIn, user } = useUser();
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-white shadow-sm border border-slate-150">
       <div className="w-full px-2 my-2 md:my-2 flex justify-between items-center max-w-7xl mx-auto">
@@ -71,12 +54,12 @@ function Appbar() {
               localStorage.clear();
             }}>
             <span className="tooltip">Logout</span>
-            <LogOut className="w-6 h-6" />
+            <SignOutButton />
           </div>
           <div className="tooltip-container">
             <span className="tooltip">Profile</span>
-            <div className="bg-blue-500 text-white hover:text-white text-lg flex items-center justify-center h-8 w-8 rounded-full poppins-regular">
-              {username}
+            <div className="pt-">
+              <UserButton />
             </div>
           </div>
         </div>
