@@ -10,6 +10,7 @@ import {
 import { rootAuthLoader } from "@clerk/remix/ssr.server";
 // Import ClerkApp
 import { ClerkApp, useUser } from "@clerk/remix";
+import { clerkEnv } from "./env.server";
 
 export const meta: MetaFunction = () => [
   {
@@ -22,11 +23,7 @@ export const meta: MetaFunction = () => [
 // Your imports
 
 export const loader: LoaderFunction = (args) => {
-  return rootAuthLoader(args, ({ request }) => {
-    const { sessionId, userId, getToken } = request.auth;
-    // Add logic to fetch data
-    return { userId };
-  });
+  return rootAuthLoader(args, clerkEnv);
 };
 
 // Your additional app code
