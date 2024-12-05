@@ -1,4 +1,4 @@
-import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+import type { MetaFunction, LoaderFunction } from "@remix-rur/node";
 import "./tailwind.css";
 import {
   Links,
@@ -34,12 +34,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body> 
+<div className="flex flex-col">
+<div className="w-[50px] h-screen sm:hidden flex">
+sidebar
+</div>
+{children}
+</div>
+    
         <ScrollRestoration />
         <Scripts />
       </body>
     </html>
+
   );
 }
 
