@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { Search } from "lucide-react";
 
 export function AccountsSection() {
@@ -6,12 +7,8 @@ export function AccountsSection() {
       <div className="flex items-center justify-between p-6 border-b">
         <h2 className="text-xl font-semibold pr-3">Blogs</h2>
         <div className="flex gap-2">
-          <div className="relative">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-gray-400" />
-            <input
-              placeholder="Search"
-              className="pl-8 h-9 w-full rounded-md border border-gray-300 bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-2d00"
-            />
+          <div className="relative underline cursor-pointer">
+     View all Blogs
           </div>
         </div>
       </div>
@@ -38,10 +35,12 @@ function AccountItem({
         <h3 className="font-medium">{title}</h3>
         <p className="text-sm text-gray-500">{number}</p>
       </div>
+      <Link to={ status === "Published" ? "blogs":"bookmarks"}>
       <button
         className={`px-3 py-1 text-sm rounded-md ${"bg-green-100 text-green-700 hover:bg-green-200"} transition-colors`}>
         {status === "Published" ? "View My Blogs" : "View Bookmarks"}
       </button>
+      </Link>
     </div>
   );
 }

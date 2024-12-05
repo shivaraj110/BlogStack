@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
-import { LogOut } from "lucide-react";
-import { useLoaderData } from "@remix-run/react";
 import { SignOutButton, UserButton, useUser } from "@clerk/remix";
 
 function Appbar() {
-  const { isLoaded, isSignedIn, user } = useUser();
   return (
     <header className="fixed top-0 left-0 right-0 z-40 bg-white shadow-sm border border-slate-150">
       <div className="w-full px-2 my-2 md:my-2 flex justify-between items-center max-w-7xl mx-auto">

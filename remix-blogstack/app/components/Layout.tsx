@@ -2,17 +2,17 @@ import { UserButton, useUser } from "@clerk/remix";
 import { Link } from "@remix-run/react";
 import {
   LayoutDashboard,
-  User2,
   Smartphone,
   CreditCard,
   AlertCircle,
   HeadphonesIcon,
+  Users2,
 } from "lucide-react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
   return (
-    <div className=" flex bg-[url('https://utfs.io/f/fVvo0hHNtQOLKvFnGkAktoYbLERVl8iTe2GWyCS4aBmqwrc7')]  bg-no-repeat bg-cover md:h-full 2xl:h-screen w-screen ">
+    <div className=" flex bg-[url('https://utfs.io/f/fVvo0hHNtQOLKvFnGkAktoYbLERVl8iTe2GWyCS4aBmqwrc7')]  h-screen bg-no-repeat bg-auto md:h-full 2xl:h-screen w-screen ">
       <div className="container mx-auto p-5">
         <div className="bg-white/50  rounded-3xl backdrop-blur-sm shadow-xl flex">
           {/* Sidebar */}
@@ -29,8 +29,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 active>
                 dashboard
               </NavItem>
-              <NavItem icon={<User2 className="w-4 h-4" />} href="/accounts">
-                Accounts
+              <NavItem icon={<Users2 className="w-4 h-4" />} href="/accounts">
+                Connections
               </NavItem>
               <NavItem icon={<Smartphone className="w-4 h-4" />} href="/mobile">
                 Mobile
