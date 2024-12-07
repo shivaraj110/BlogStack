@@ -1,4 +1,4 @@
-import type { MetaFunction, LoaderFunction } from "@remix-rur/node";
+import type { MetaFunction, LoaderFunction ,LoaderFunctionArgs} from "@remix-run/node";
 import "./tailwind.css";
 import {
   Links,
@@ -22,7 +22,7 @@ export const meta: MetaFunction = () => [
 
 // Your imports
 
-export const loader: LoaderFunction = (args) => {
+export const loader: LoaderFunction = (args : LoaderFunctionArgs) => {
   return rootAuthLoader(args, clerkEnv);
 };
 

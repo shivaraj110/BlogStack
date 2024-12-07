@@ -2,11 +2,11 @@ import { UserButton, useUser } from "@clerk/remix";
 import { Link } from "@remix-run/react";
 import {
   LayoutDashboard,
-  Smartphone,
   CreditCard,
   AlertCircle,
   HeadphonesIcon,
   Users2,
+  LineChart,
 } from "lucide-react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
@@ -32,8 +32,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
               <NavItem icon={<Users2 className="w-4 h-4" />} href="/accounts">
                 Connections
               </NavItem>
-              <NavItem icon={<Smartphone className="w-4 h-4" />} href="/mobile">
-                Mobile
+              <NavItem icon={<LineChart className="w-4 h-4" />} href="/mobile">
+                My Stats
               </NavItem>
               <NavItem
                 icon={<CreditCard className="w-4 h-4" />}
@@ -62,7 +62,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
               </div>
               <div className="flex items-center gap-3">
                 <span>Hello {user?.username}</span>
-                <UserButton />{" "}
+                <div>
+                <UserButton/>{" "}
+                </div>
               </div>
             </header>
             {children}

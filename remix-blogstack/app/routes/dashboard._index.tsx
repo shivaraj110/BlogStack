@@ -1,4 +1,4 @@
-import { AccountsSection } from "~/components/BlogSection";
+import { BlogSection } from "~/components/BlogSection";
 import { BillsSection } from "~/components/BillSection";
 import { Layout } from "~/components/Layout";
 import { ProfileCard } from "~/components/ProfileCard";
@@ -13,7 +13,7 @@ export default function DashboardPage() {
           <Writeblog />
        </div>
         <div className="space-y-6">
-          <AccountsSection />
+          <BlogSection />
           <BillsSection />
         </div>
       </div>

@@ -28,6 +28,7 @@ model User {
   Comment   Comment[]
   Replies   Replies[]
   Connections Connection[]
+  openToCollab Boolean @default(true)
 }
 
 
@@ -42,13 +43,14 @@ model Post {
   title       String
   content     String
   published   Boolean    @default(false)
-  author      User       @relation(fields: [authorId], references: [id])
-  authorId    Int
+  author      User       @relation(fields: [authorId], references: [identifier])
+  authorId    String
+  authorImgUrl String
   publishDate String
   tags        String[]
   bookmarks   Bookmark[]
   bookmarked  Boolean    @default(false)
-  likes       Int
+  likes       Int @default(0)
   comments    Comment[]
   imgUrl      String
 }
