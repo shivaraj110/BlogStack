@@ -1,38 +1,27 @@
+import { useUser } from "@clerk/remix"
 import { prisma } from "./db"
 
-export const setCollabTrue = async (id : string) => {
-    try {
-        await prisma.user.update({
-            where : {
-                identifier : id
-            },
-            data : {
+export const setCollabTrue = (id:string) => {
+    const user = useUser()
+    prisma.user.update({
+        where : {
+            identifier : id
+        },
+        data : {
             openToCollab : true
-            },
-        })
-        return {
-            msg : "open to collab"
         }
-    }
-    catch(e){
-        console.error(e);
-    }
+    })
+    return true
 }
-export const setCollabFalse = async (id : string) => {
-    try {
-        await prisma.user.update({
-            where : {
-                identifier : id
-            },
-            data : {
-            openToCollab : false
-            },
-        })
-        return {
-            
+export const setCollabFalse = (id:string) => {
+    const user = useUser()
+    prisma.user.update({
+        where : {
+            identifier : id
+        },
+        data : {
+            openToCollab : true
         }
-    }
-    catch(e){
-        console.error(e);
-    }
+    })
+    return false
 }

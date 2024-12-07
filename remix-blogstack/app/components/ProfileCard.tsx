@@ -4,7 +4,6 @@ import { Info } from "lucide-react";
 
 export function ProfileCard() {
   const { user } = useUser();
-
   return (
     <div className="bg-white/60 backdrop-brightness-110 backdrop-blur-sm rounded-xl shadow-md mb-6 h-fit">
       <div className="flex items-center justify-between p-6 border-b">

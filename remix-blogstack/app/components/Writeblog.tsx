@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import React from "react";
 
 function Writeblog() {
@@ -10,11 +11,11 @@ function Writeblog() {
         <div className="p-5">
           a fastest way for your words from your head to the internet is
           actually
-          <button className="font-semibold underline">Start writing </button>.
+          <Link to={"/blog/write"} className="font-semibold underline">Start writing </Link>.
         </div>
         <div className="p-5">
           know someone who could help you with more ideas ? then you should
-          <button className=" font-semibold underline">Collaborate </button>.
+          <Link to={"/blog/collab"} className=" font-semibold underline">Collaborate </Link>.
         </div>{" "}
         <div className="p-5">
           it's not cool to abandon an idea halfway you know. Care to

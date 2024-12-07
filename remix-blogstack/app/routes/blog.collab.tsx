@@ -1,5 +1,6 @@
 import { LoaderFunction } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
+import { MessageCircle } from "lucide-react"
 import { prisma } from "~/.server/db"
 
 export const loader : LoaderFunction = async(args) => {
@@ -39,7 +40,17 @@ const Collab = () => {
             {"Available Collaborators "}
         </div>
         {
-            Users.map( user => <div>{user.fname}</div>)
+            Users.map( user => <div className="flex gap-2 p-5 "> 
+                                    <div className=" bg-slate-200 w-[300px] flex justify-between p-5 rounded-lg">
+                                         <div className="mt-2">
+                                         {user.fname}
+                                         </div>
+                                        <img src={user.pfpUrl ?? ""} alt="" className="size-10 rounded-full" />
+                                    </div> 
+                                    <div className="p-5">
+                                    <MessageCircle className=" cursor-pointer" />
+                                    </div>
+                                </div>)
         }
     </div>
 }

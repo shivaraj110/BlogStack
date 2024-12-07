@@ -2,7 +2,6 @@
 import {
   SignedIn,
   SignedOut,
-  useUser,
 } from "@clerk/remix";
 import LandingComp from "~/components/LandingComp";
 import { LoaderFunction, LoaderFunctionArgs, redirect } from "@remix-run/node";

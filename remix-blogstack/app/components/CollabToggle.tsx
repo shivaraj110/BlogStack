@@ -1,9 +1,4 @@
-import { useUser } from "@clerk/remix"
-import { setCollabTrue, setCollabFalse } from "~/.server/setCollab"
-
 const CollabToggle = () => {
-  const {user} = useUser()
-  
 return <div className="checkbox-wrapper-35">
 <input value="private" name="switch" id="switch" type="checkbox" className="switch"/>
 <label htmlFor="switch">
