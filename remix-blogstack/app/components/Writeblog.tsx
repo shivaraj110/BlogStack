@@ -1,9 +1,9 @@
 import { Link } from "@remix-run/react";
-import React from "react";
 
 function Writeblog() {
   return (
-    <div className="bg-white/60 backdrop-brightness-110 backdrop-blur-sm rounded-xl shadow-md mb-6 h-fit">
+    <div className="bg-white/60 sm:flex hidden backdrop-brightness-110 backdrop-blur-sm rounded-xl shadow-md mb-6 h-fit">
+      <div className=" ">
       <div className="p-5 font-semibold text-gray-800">
         got something in mind ?{" "}
       </div>
@@ -22,6 +22,12 @@ function Writeblog() {
           <br />
           <button className=" font-semibold underline">finish a draft</button>?
         </div>{" "}
+      </div>
+      </div>
+      <div className="sm:hidden text-sm flex gap-2 py-5 px-1 justify-center">
+        <Link to={"/blog/write"} className="underline">Write a blog</Link>
+        <Link to={"/blog/collab"} className="underline">Collab on a blog</Link>
+        <Link to={"/"} className="underline">Finish a draft</Link>
       </div>
     </div>
   );

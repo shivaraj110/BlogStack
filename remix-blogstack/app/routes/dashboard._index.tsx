@@ -1,14 +1,12 @@
 import { BlogSection } from "~/components/BlogSection";
 import { BillsSection } from "~/components/BillSection";
-import { Layout } from "~/components/Layout";
 import { ProfileCard } from "~/components/ProfileCard";
 import Writeblog from "~/components/Writeblog";
 
 export default function DashboardPage() {
   return (
-    <Layout>
-      <div className="grid md:grid-cols-[1fr_400px] gap-6">
-        <div>
+      <div className="grid md:grid-cols-[1fr_600px] sm:p-10 p-5 gap-6">
+        <div className="col-span-0.5">
           <ProfileCard />
           <Writeblog />
        </div>
@@ -17,6 +15,5 @@ export default function DashboardPage() {
           <BillsSection />
         </div>
       </div>
-    </Layout>
   );
 }

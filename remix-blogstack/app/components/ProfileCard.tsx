@@ -9,7 +9,7 @@ export function ProfileCard() {
       <div className="flex items-center justify-between p-6 border-b">
         <h2 className="text-xl font-semibold">My profile</h2>
         <div className="flex gap-1">
-          <Info className="text-gray-400 size-4 cursor-pointer"/>
+          <p className="text-green-400 -translate-y-1 mx-2">beta</p>
           <CollabToggle/></div>
       </div>
       <div className="p-6 grid md:grid-cols-[240px_1fr] gap-6">
