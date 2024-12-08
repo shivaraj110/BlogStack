@@ -8,16 +8,6 @@ import {
     SignUpButton,
   } from "@clerk/remix";
 export default function LandingComp(){
-    interface BlogType {
-        id: number;
-        title: string;
-        content: string;
-        author: {
-          name: string;
-        };
-        publishDate: string;
-      }
-      const [isMobile, setIsMobile] = useState(false);
       const blogs = [ {
         id: 1,
         title: "featured blog",
@@ -31,44 +21,7 @@ export default function LandingComp(){
     
     
     return       <div className="flex flex-col min-h-screen bg-gradient-to-r from-blue-600 to-blue-800">
-    <div
-      onClick={() => {
-        setIsMobile(true);
-      }}
-      className={` ${
-        isMobile ? " -translate-x-20 " : null
-      } p-5 space-y-1 sm:hidden cursor-pointer `}>
-      <div className="bg-white/80 w-6 rounded-lg h-1 "></div>
-      <div className="bg-white/80 w-6 rounded-lg h-1 "></div>
-      <div className="bg-white/80 w-6 rounded-lg h-1 "></div>
-    </div>
-    <div
-      className={` h-full rounded-r-lg ${
-        !isMobile ? "-translate-x-48 hidden" : null
-      }  transi bg-white/45 backdrop-blur-md -translate-y-12 w-fit flex-row `}>
-      <div
-        onClick={() => {
-          setIsMobile(false);
-        }}
-        className="flex justify-end pr-4 pt-2 cursor-pointer font-semibold">
-        X
-      </div>
-      <ul className="space-y-4 px-16 sm:hidden text-gray-700 mt-2 mb-6">
-        <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
-          About
-        </li>
-        <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
-          Contact
-        </li>
-        <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
-          <SignUpButton/>
-        </li>
-        <li className=" cursor-pointer hover:text-blue-500 font-semibold ">
-          <SignInButton/>
-        </li>
-      </ul>
-    </div>{" "}
-    <header className=" poppins-regular sm:flex hidden justify-center">
+    <header className=" poppins-regular flex justify-center">
       {" "}
       <div className="container bg-white/55 border-[1.5px] border-blue-200 rounded-[30px] mt-6 backdrop-blur-xl w-fit transi p-3">
         {" "}

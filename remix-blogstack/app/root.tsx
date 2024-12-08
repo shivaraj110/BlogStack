@@ -11,6 +11,7 @@ import { rootAuthLoader } from "@clerk/remix/ssr.server";
 // Import ClerkApp
 import { ClerkApp, useUser } from "@clerk/remix";
 import { clerkEnv } from "./env.server";
+import { useState } from "react";
 
 export const meta: MetaFunction = () => [
   {
@@ -28,6 +29,7 @@ export const loader: LoaderFunction = (args : LoaderFunctionArgs) => {
 
 // Your additional app code
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [isMobile,setIsMObile] = useState(false)
   return (
     <html lang="en">
       <head>
