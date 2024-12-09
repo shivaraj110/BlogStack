@@ -5,7 +5,7 @@ import Writeblog from "~/components/Writeblog";
 
 export default function DashboardPage() {
   return (
-      <div className="grid md:grid-cols-[1fr_600px] sm:p-10 p-5 gap-6">
+      <div className="grid md:grid-cols-[1fr_7ss00px] sm:p-10 p-5 gap-6">
         <div className="col-span-0.5">
           <ProfileCard />
           <Writeblog />
