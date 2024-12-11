@@ -1,6 +1,6 @@
 export function CollabCard() {
   return (
-    <div className="bg-gray-900/20 backdrop-brightness-95 text-slate-900  backdrop-blur-md rounded-xl shadow-2xl mt-6">
+    <div className="bg-gray-900/35 backdrop-brightness-95 text-slate-900  backdrop-blur-md rounded-xl shadow-2xl mt-6">
       <div className="flex items-center justify-between p-6 border-b">
         <h2 className="text-xl font-semibold">My Collaborations</h2>
         <button className="px-3 py-1 text-sm border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">

@@ -5,7 +5,7 @@ import { Info } from "lucide-react";
 export function ProfileCard() {
   const { user } = useUser();
   return (
-    <div className="bg-gray-900/20 backdrop-brightness-95 border  backdrop-blur-sm rounded-xl shadow-2xl mb-6 h-fit">
+    <div className="bg-gray-900/35 backdrop-brightness-95 border  backdrop-blur-sm rounded-xl shadow-2xl mb-6 h-fit">
       <div className="flex items-center justify-between p-6 border-b">
         <h2 className="text-xl font-semibold text-slate-900">My profile</h2>
         <div className="flex gap-1">

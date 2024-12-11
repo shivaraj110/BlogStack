@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 export function BlogSection() {
   return (
-    <div className="bg-gray-900/20 backdrop-brightness-95 text-slate-900  backdrop-blur-md border rounded-xl shadow-2xl">
+    <div className="bg-gray-900/35 backdrop-brightness-95 text-slate-900  backdrop-blur-md border rounded-xl shadow-2xl">
       <div className="flex items-center justify-between p-6 border-b">
         <h2 className="text-xl font-semibold pr-3">Blogs</h2>
         <div className="flex gap-2">

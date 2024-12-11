@@ -40,7 +40,8 @@ const Collab = () => {
             {"Available Collaborators "}
         </div>
         {
-            Users.map( user => <div className="flex gap-2 p-5 "> 
+            Users.map( user => <div className="flex gap-2 p-5 "
+            key={user.id}> 
                                     <div className=" bg-slate-200 w-[300px] flex justify-between p-5 rounded-lg">
                                          <div className="mt-2">
                                          {user.fname}

@@ -76,7 +76,8 @@ return (
       <div className="mt-6">
         {blogs.map((b) => (
           <BlogPost
-          imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrqLPeOlGY5Ezx_xkUTLkTmPSsEVSShRMJg&s"
+          key={b.id}
+          imgUrl={b.imgUrl ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrqLPeOlGY5Ezx_xkUTLkTmPSsEVSShRMJg&s"}
           authorImgUrl={b.authorImgUrl}
             authorName={b.author.name || "Anonymous"}
             title={b.title}

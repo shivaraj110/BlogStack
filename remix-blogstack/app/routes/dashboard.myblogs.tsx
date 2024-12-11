@@ -2,7 +2,7 @@ import { getAuth } from "@clerk/remix/ssr.server"
 import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { useLoaderData } from "@remix-run/react"
 import { prisma } from "~/.server/db"
-import BlogPost from "~/components/Blog"
+import MyBlogPost from "~/components/MyBlog"
 
 export const loader:LoaderFunction = async(args : LoaderFunctionArgs) => {
     const {userId} = await getAuth(args)
@@ -57,9 +57,10 @@ const MyBlogs = () => {
         <div className="p-1 max-w-7xl mx-auto">
           <div className="flex flex-col">
             <div className="mt-6">
-               {body.map((b : BlogType) => (
-                <BlogPost
-                imgUrl={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrqLPeOlGY5Ezx_xkUTLkTmPSsEVSShRMJg&s"}
+               {blogs.map((b : BlogType) => (
+                <MyBlogPost
+                key={b.id}
+                imgUrl={b.imgUrl}
                 authorImgUrl={b.authorImgUrl}
                   authorName={b.author.name || "Anonymous"}
                   title={b.title}

@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 
 function Writeblog() {
   return (
-    <div className="bg-gray-900/20 backdrop-brightness-95 border backdrop-blur-sm sm:flex hidden rounded-xl shadow-2xl mb-6 h-fit">
+    <div className="bg-gray-900/35 backdrop-brightness-95 border backdrop-blur-sm sm:flex hidden rounded-xl shadow-2xl mb-6 h-fit">
       <div className=" ">
       <div className="p-5 font-semibold text-slate-900">
         got something in mind ?{" "}
@@ -18,16 +18,16 @@ function Writeblog() {
           <Link to={"/blog/collab"} className=" font-semibold underline">Collaborate </Link>.
         </div>{" "}
         <div className="p-5 text-slate-900">
-          it's not cool to abandon an idea halfway you know. Care to
+          it's not cool to abandon an idea halfway you know
           <br />
           <button className=" font-semibold underline">finish a draft</button>?
         </div>{" "}
       </div>
       </div>
       <div className="sm:hidden text-sm flex gap-2 py-5 px-1 justify-center">
-        <Link to={"/blog/write"} className="underline">Write a blog</Link>
+        <Link to={"/blog/solo"} className="underline">Write a blog</Link>
         <Link to={"/blog/collab"} className="underline">Collab on a blog</Link>
-        <Link to={"/"} className="underline">Finish a draft</Link>
+        <Link to={"/draft"} className="underline">Finish a draft</Link>
       </div>
     </div>
   );

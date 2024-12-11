@@ -37,9 +37,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-[url('../public/bg.jpg')] bg-cover bg-no-repeat"> 
         <ScrollRestoration />
         <Scripts />
+      <body className="bg-[url('/bg.jpg')] bg-cover bg-no-repeat"> 
 {children}
       </body>
     </html>

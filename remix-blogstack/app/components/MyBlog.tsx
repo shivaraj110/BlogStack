@@ -1,8 +1,8 @@
 import {  useState } from "react";
-import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
+import { Bookmark, Heart, MessageCircle, Share2, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFetcher } from "@remix-run/react";
-import { useUser } from "@clerk/remix";
+
 export interface BlogData {
   authorName: string;
   title: string;
@@ -15,7 +15,7 @@ export interface BlogData {
   authorImgUrl : string
 }
 
-function BlogPost({
+function MyBlogPost({
   authorName,
   title,
   content,
@@ -28,9 +28,8 @@ function BlogPost({
 }: BlogData) {
   const [isLiked, setIsLiked] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
+  const fetcher = useFetcher()
 
-const fetcher = useFetcher()
-const {user} = useUser()
 
   return (
     <div className=" bg-gray-900/35 backdrop-brightness-95 text-slate-900 backdrop-blur-sm rounded-md border border-gray-200 overflow-hidden my-4">
@@ -49,17 +48,17 @@ const {user} = useUser()
           </div>
         </div>
         <div className="md:pl-10">
-          <Link to={`/dashboard/fullblog/${id}`}>
+          <Link to={`/blog/${id}`}>
             <h1 className="text-2xl font-bold  mb-2 hover:text-blue-600  cursor-pointer transition-colors duration-200">
               {title}
             </h1>
           </Link>
-          <div className="text-sm grid grid-cols-3 gap-3 mb-4">
+          <div className="text-sm grid grid-cols-3 mb-4">
 <div className="col-span-2">
-            {content.slice(0, 600) + (content.length < 600 ? "" : "...")}
+            {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
 </div>
-	<div className="mx-auto col-span-1 pl-5">
-<img src={imgUrl} alt="BlogImage" className=" cursor-pointer size-full border rounded-lg col-span-1" />
+	<div className="mx-auto">
+<img src={imgUrl} alt="BlogImage" className="h-[150px] cursor-pointer w-[300px] border rounded-lg col-span-1" />
 	</div>
           </div>
           <div className="flex flex-wrap justify-between mb-4">
@@ -93,29 +92,31 @@ const {user} = useUser()
               <span className="text-xs text-blue-600  rounded-full px-2 py-1">
                 {Math.floor(content.split(" ").length / 60) + " mins read"}
               </span>
-              <fetcher.Form method={ isBookmarked ? "DELETE" : "POST"} action= {isBookmarked ? "/removebookmarks" :"/addbookmark"} >
-              <input type="hidden" name="userId" value={user?.id ?? ""} />
-                   <button
-                    onClick={()=>{
-                      setTimeout(()=>{
-                        setIsBookmarked(!isBookmarked)
-                      },1000)
-                     }}
-                   type="submit"
-                   name="postId"
-                   value={id}
+              <fetcher.Form method="delete" action= {"/deleteBlog"} >
+              <button className="text-gray-900"
+                type="submit"  
+                name="id"        
+                value={id}
+           >
+                <Trash2/>
+              </button>
+              </fetcher.Form>
+              <button
                 className={`${
                   isBookmarked ? "text-blue-500" : "hover:text-blue-500"
                 } transition-colors duration-200`}
     >
                 <Bookmark
+		 onClick={()=>{
+      setTimeout(()=>{
+        setIsBookmarked(!isBookmarked)
+      },1000)
+     }}
                   className={`h-5 w-5 ${
                     isBookmarked ? "fill-current" : "fill-none"
                   }`}
                 />
               </button>
-              </fetcher.Form>
-         
               <button className="hover:text-green-500 transition-colors duration-200">
                 <Share2 className="h-5 w-5" />
               </button>
@@ -127,4 +128,4 @@ const {user} = useUser()
   );
 }
 
-export default BlogPost;
+export default MyBlogPost;

@@ -32,3 +32,19 @@ export const pushBlogs = async({
     }
     }
 
+export const deleteBlog = async(id : number) => {
+   try{
+    const blog = await prisma.post.delete({
+        where : {
+            id
+        }
+    })
+    if(blog){
+        return true
+    }
+    return false
+   }
+   catch(e){
+    console.error("error" + e);
+   }
+}  
