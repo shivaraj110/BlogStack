@@ -15,7 +15,7 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
+  id        Int        @id @default(autoincrement())  
   identifier String @unique
   email     String  
   name      String?
@@ -57,8 +57,8 @@ model Post {
 
 model Bookmark {
   id        Int      @id @default(autoincrement())
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    Int
+  user      User     @relation(fields: [userId], references: [identifier], onDelete: Cascade)
+  userId    String
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    Int
   createdAt DateTime @default(now())

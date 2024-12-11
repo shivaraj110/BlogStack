@@ -2,22 +2,22 @@ import { Link } from "@remix-run/react";
 
 function Writeblog() {
   return (
-    <div className="bg-white/60 sm:flex hidden backdrop-brightness-110 backdrop-blur-sm rounded-xl shadow-md mb-6 h-fit">
+    <div className="bg-gray-900/20 backdrop-brightness-95 border backdrop-blur-sm sm:flex hidden rounded-xl shadow-2xl mb-6 h-fit">
       <div className=" ">
-      <div className="p-5 font-semibold text-gray-800">
+      <div className="p-5 font-semibold text-slate-900">
         got something in mind ?{" "}
       </div>
       <div className="grid grid-cols-3">
-        <div className="p-5">
+        <div className="p-5 text-slate-900">
           a fastest way for your words from your head to the internet is
           actually
           <Link to={"/blog/write"} className="font-semibold underline">Start writing </Link>.
         </div>
-        <div className="p-5">
+        <div className="p-5 text-slate-900">
           know someone who could help you with more ideas ? then you should
           <Link to={"/blog/collab"} className=" font-semibold underline">Collaborate </Link>.
         </div>{" "}
-        <div className="p-5">
+        <div className="p-5 text-slate-900">
           it's not cool to abandon an idea halfway you know. Care to
           <br />
           <button className=" font-semibold underline">finish a draft</button>?

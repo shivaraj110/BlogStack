@@ -1,5 +1,6 @@
 import type { MetaFunction, LoaderFunction ,LoaderFunctionArgs} from "@remix-run/node";
 import "./tailwind.css";
+import bg from "../public/bg.jpg"
 import {
   Links,
   Meta,
@@ -36,13 +37,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body> 
+      <body className="bg-[url('../public/bg.jpg')] bg-cover bg-no-repeat"> 
         <ScrollRestoration />
         <Scripts />
 {children}
       </body>
     </html>
-
   );
 }
 

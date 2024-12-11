@@ -1,6 +1,7 @@
 import { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
 import { prisma } from "~/.server/db"
+import BlogPost from "~/components/Blog"
 
 export const loader:LoaderFunction = async() => {
   try{
@@ -15,6 +16,11 @@ export const loader:LoaderFunction = async() => {
         imgUrl:true,
         publishDate : true,
         authorImgUrl:true,
+        author : {
+          select : {
+            name : true
+          }
+        }
       }
     })
     return {
@@ -49,7 +55,10 @@ interface BlogData{
   likes : number
   imgUrl : string,
   authorImgUrl : string,
-  tags : string[]
+  tags : string[],
+author : {
+name : string
+},id : string
 }
 
   const {body}= useLoaderData<typeof loader>()
@@ -61,21 +70,25 @@ if( !body[0] ){
   </div>
 }
 
-  return (
-  <div>
-    {
-      blogs.map(  blog => 
-        <div className="flex gap-2 justify-center">
-          <div>
-          {blog.authorId}
-          </div>
-<div> {blog.title}
-</div>
-<div className="text-green-300">{blog.tags}</div>
-<img src={blog.authorImgUrl} alt="" className="size-12 cursor-pointer rounded-full" />
-        </div>
-      )
-    }
+return (
+  <div className="p-1 max-w-7xl mx-auto">
+    <div className="flex flex-col">
+      <div className="mt-6">
+        {blogs.map((b) => (
+          <BlogPost
+          imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrqLPeOlGY5Ezx_xkUTLkTmPSsEVSShRMJg&s"
+          authorImgUrl={b.authorImgUrl}
+            authorName={b.author.name || "Anonymous"}
+            title={b.title}
+            content={b.content}
+            tags={!b.tags ? ["notags"] : b.tags}
+            publishDate={b.publishDate ? b.publishDate : "no trace"}
+            likes={b.likes}
+            id={Number(b.id)}
+          />
+        ))}
+      </div>
+    </div>
   </div>
-  )
+);
 }

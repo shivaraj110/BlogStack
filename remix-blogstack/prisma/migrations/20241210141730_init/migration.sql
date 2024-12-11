@@ -8,6 +8,7 @@ CREATE TABLE "User" (
     "pfpUrl" TEXT,
     "fname" TEXT,
     "lname" TEXT,
+    "openToCollab" BOOLEAN NOT NULL DEFAULT true,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
