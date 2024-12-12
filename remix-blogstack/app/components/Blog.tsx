@@ -1,7 +1,6 @@
 import {  useState } from "react";
 import { Bookmark, Heart, MessageCircle, Share2 } from "lucide-react";
-import { Link } from "react-router-dom";
-import { useFetcher } from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
 import { useUser } from "@clerk/remix";
 export interface BlogData {
   authorName: string;
@@ -37,7 +36,7 @@ const {user} = useUser()
       <div className="p-5">
         <div className="flex items-center mb-4">
           <img
-            className="h-9 w-9 rounded-full border-2 border-blue-500 mr-2"
+            className="h-9 w-9 object-scale-down rounded-full border-2 border-blue-500 mr-2"
             src={authorImgUrl}
             alt={authorName}
           />
@@ -59,7 +58,7 @@ const {user} = useUser()
             {content.slice(0, 600) + (content.length < 600 ? "" : "...")}
 </div>
 	<div className="mx-auto col-span-1 pl-5">
-<img src={imgUrl} alt="BlogImage" className=" cursor-pointer size-full border rounded-lg col-span-1" />
+<img src={imgUrl} alt="BlogImage" className=" cursor-pointer object-scale-down size-full border rounded-lg col-span-1" />
 	</div>
           </div>
           <div className="flex flex-wrap justify-between mb-4">
@@ -90,6 +89,8 @@ const {user} = useUser()
               </button>
             </div>
             <div className="flex items-center space-x-4">
+              <Link to={`/dashboard/fullblog/${id}`}>
+              <span className="text-xs text-blue-600  rounded-full px-2 py-1 cursor-pointer">Read more..</span></Link>
               <span className="text-xs text-blue-600  rounded-full px-2 py-1">
                 {Math.floor(content.split(" ").length / 60) + " mins read"}
               </span>
