@@ -1,11 +1,13 @@
 import { SignOutButton, UserButton, useUser } from "@clerk/remix";
 import { Link, Outlet } from "@remix-run/react";
 import {
-  Plus,
   AlignJustify,
   X,
-  Pen,
-  Users,
+  BookMarked,
+  LayoutDashboard,
+  TextQuote,
+  NotebookPen,
+  MessageSquareText,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -25,16 +27,47 @@ const Home = () => {
           {/* Main Content */}
           <main className="flex-1 ">
             <header className="flex justify-between items-center">
-              <div className="flex sm:flex-row flex-col space-x-20">
-                <Link to={"/dashboard"} className="text-2xl font-light">Dashboard</Link>
-                <Link to={"blogs"} className="text-2xl font-light">Blogs</Link>
-                <Link to={"bookmarks"} className="text-2xl font-light">Bookmarks</Link>
-                <Link to={"blog/solo"}><Plus className="size-10 -translate-y-1 cursor-pointer"/></Link>
+              <div className="flex sm:flex-row flex-col items-center space-x-20">
+                <Link to={"/dashboard"} className={`text-2xl overflow-x-auto flex items-center overflow-hidden text-gray-700  font-light`}>
+                <div>
+                  <LayoutDashboard className=""/>
+                  </div>
+                  <div className="pl-5 w-0 hover:w-full overflow-hidden -translate-x-4 transi text-[17px] text-gray-800">
+                    {"Dashboard"}
+                  </div>
+                  </Link>
+                  <Link to={"/dashboard/blogs"} className={`text-2xl overflow-x-auto flex items-center overflow-hidden text-gray-700  font-light`}>
+                <div>
+                  <TextQuote className=""/>
+                  </div>
+                  <div className="pl-5 w-0 hover:w-full overflow-hidden -translate-x-4 transi text-[17px] text-gray-800">
+                    {"Blogs"}
+                  </div>
+                  </Link>
+                  <Link to={"/dashboard/bookmarks"} className={`text-2xl overflow-x-auto flex items-center overflow-hidden text-gray-700  font-light`}>
+                <div>
+                  <BookMarked className=""/>
+                  </div>
+                  <div className="pl-5 w-0 hover:w-full overflow-hidden -translate-x-4 transi text-[17px] text-gray-800">
+                    {"Bookmarks"}
+                  </div>
+                  </Link>
+                  <Link to={"/dashboard/blog/solo"} className={`text-2xl overflow-x-auto flex items-center overflow-hidden text-gray-700  font-light`}>
+                <div>
+                  <NotebookPen className=""/>
+                  </div>
+                  <div className="pl-5 w-0 hover:w-full overflow-hidden -translate-x-4 transi text-[17px] text-gray-800">
+                    {"Write"}
+                  </div>
+                  </Link>
               </div>
               <div className="flex items-center gap-3">
-                <span className="-translate-y-1">Hello {user?.username}</span>
-                <div>
-                <UserButton/>{" "}
+              <Link to={"/dashboard/chatbox"} className={`text-2xl text-gray-700 font-thin overflow-x-auto flex items-center overflow-hidden `}>
+                  <MessageSquareText className=""/>
+                  </Link>
+                <span className="-translate-y-1 items-center">Hello {user?.username}</span>
+                <div className="items-center">
+                <UserButton/>
                 </div>
               </div>
             </header>

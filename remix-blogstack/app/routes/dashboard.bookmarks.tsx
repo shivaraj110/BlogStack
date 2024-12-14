@@ -63,8 +63,8 @@ return (
         {blogs.map((b) => (
           <BookmarkedBlogPost
           key={b.post.id}
-          imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrqLPeOlGY5Ezx_xkUTLkTmPSsEVSShRMJg&s"
-          authorImgUrl={b.post.authorImgUrl}
+          imgUrl={b.post.imgUrl}
+          authorImgUrl={b.post.authorImgUrl}  
             authorName={b.post.author.name || "Anonymous"}
             title={b.post.title}
             content={b.post.content}

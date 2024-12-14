@@ -58,7 +58,7 @@ function MyBlogPost({
             {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
 </div>
 	<div className="mx-auto">
-<img src={imgUrl} alt="BlogImage" className="h-[150px] cursor-pointer w-[300px] border rounded-lg col-span-1" />
+<img src={imgUrl} alt="BlogImage" className="cursor-pointer object-scale-down size-full border rounded-lg col-span-1" />
 	</div>
           </div>
           <div className="flex flex-wrap justify-between mb-4">

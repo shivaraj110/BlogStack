@@ -1,6 +1,6 @@
 import { getAuth } from "@clerk/remix/ssr.server"
 import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node"
-import { useLoaderData } from "@remix-run/react"
+import { Link, useLoaderData } from "@remix-run/react"
 import { prisma } from "~/.server/db"
 import MyBlogPost from "~/components/MyBlog"
 
@@ -53,6 +53,13 @@ const MyBlogs = () => {
     }
     const {body}   = useLoaderData<typeof loader>()
     const blogs : BlogType[] = body
+
+    if( !blogs[0] ){
+      return <div className="p-5 flex">
+        you have no blogs published,<Link to={"/dashboard/blogs"} className="underline px-1 cursor-pointer">Write blogs</Link>
+      </div>
+    }
+
     return (
         <div className="p-1 max-w-7xl mx-auto">
           <div className="flex flex-col">

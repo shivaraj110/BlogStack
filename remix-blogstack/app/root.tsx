@@ -11,7 +11,7 @@ import { rootAuthLoader } from "@clerk/remix/ssr.server";
 // Import ClerkApp
 import { ClerkApp } from "@clerk/remix";
 import { clerkEnv } from "./env.server";
-import { useState } from "react";
+import React from "react";
 
 export const meta: MetaFunction = () => [
   {
@@ -20,7 +20,6 @@ export const meta: MetaFunction = () => [
     viewport: "width=device-width,initial-scale=1",
   },
 ];
-
 // Your imports
 
 export const loader: LoaderFunction = (args : LoaderFunctionArgs) => {

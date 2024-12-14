@@ -58,7 +58,7 @@ const {user} = useUser()
             {content.slice(0, 600) + (content.length < 600 ? "" : "...")}
 </div>
 	<div className="mx-auto col-span-1 pl-5">
-<img src={imgUrl} alt="BlogImage" className=" cursor-pointer object-scale-down size-full border rounded-lg col-span-1" />
+<img src={imgUrl} alt="BlogImage" className=" cursor-pointer w-[370px] h-[245px]  border rounded-lg col-span-1" />
 	</div>
           </div>
           <div className="flex flex-wrap justify-between mb-4">
@@ -129,3 +129,4 @@ const {user} = useUser()
 }
 
 export default BlogPost;
+//370*245
