@@ -28,7 +28,7 @@ const Home = () => {
           <main className="flex-1 ">
             <header className="flex justify-between items-center">
               <div className="flex sm:flex-row flex-col items-center space-x-20">
-                <Link to={"/dashboard"} className={`text-2xl overflow-x-auto flex items-center overflow-hidden text-gray-700  font-light`}>
+                <Link to={"/dashboard"} className={`text-2xl overflow-x-auto  flex items-center overflow-hidden text-gray-700  font-light`}>
                 <div>
                   <LayoutDashboard className=""/>
                   </div>

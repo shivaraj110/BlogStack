@@ -1,10 +1,13 @@
+import { getAuth } from "@clerk/remix/ssr.server"
 import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
+import { getBookmarks } from "~/.server/bookmark"
 import { prisma } from "~/.server/db"
 import BlogPost from "~/components/Blog"
 
-export const loader:LoaderFunction = async({params}:LoaderFunctionArgs) => {
-    const tag = params["tag"]
+export const loader:LoaderFunction = async(args:LoaderFunctionArgs) => {
+    const {userId} = await getAuth(args)
+    const tag = args.params["tag"]
   try{
     const blogs = await prisma.post.findMany({
         where : {
@@ -29,9 +32,17 @@ export const loader:LoaderFunction = async({params}:LoaderFunctionArgs) => {
         }
       }
     })
+    const bookmarks = await getBookmarks(userId ?? "")
+    let bookMarkPostIds:number[] = [] 
+    bookmarks?.map((b)=>[
+      bookMarkPostIds.push(b.postId)
+    ])
     return {
       status : "success",
-      body : blogs
+      body : {
+        blogs,
+        bookMarkPostIds
+      }
     }
   }
   catch (e){
@@ -68,9 +79,9 @@ name : string
 }
 
   const {body}= useLoaderData<typeof loader>()
-  const blogs:BlogData[] = body
-
-if( !body[0] ){
+  const blogs:BlogData[] = body.blogs
+  const bookmarkIds:number[] = body.bookMarkPostIds
+if( !blogs[0] ){
   return <div className="p-5 flex">
     No blogs added yet. Be the first one to <Link to={"/blog/write"} className="underline px-1 cursor-pointer">add blogs</Link>!
   </div>
@@ -92,6 +103,7 @@ return (
             publishDate={b.publishDate ? b.publishDate : "no trace"}
             likes={b.likes}
             id={Number(b.id)}
+            bookmarks={bookmarkIds}
           />
         ))}
       </div>

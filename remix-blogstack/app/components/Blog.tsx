@@ -11,7 +11,8 @@ export interface BlogData {
   likes?: number;
   id: number;
   imgUrl : string
-  authorImgUrl : string
+  authorImgUrl : string,
+  bookmarks:number[]
 }
 
 function BlogPost({
@@ -23,10 +24,23 @@ function BlogPost({
   likes,
   id,
   authorImgUrl,
-  imgUrl
+  imgUrl,
+  bookmarks
 }: BlogData) {
+
+
+  const BookMarked = ()=>{
+  let val = false
+   bookmarks.map((b)=>{
+    if(b === id){
+      val = true
+    }  
+  }
+)
+  return val
+}
   const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isBookmarked, setIsBookmarked] = useState(BookMarked);
 
 const fetcher = useFetcher()
 const {user} = useUser()
@@ -64,11 +78,11 @@ const {user} = useUser()
           <div className="flex flex-wrap justify-between mb-4">
             <div className="flex flex-wrap gap-2">
               {tags.map((tag, index) => (
-                <span
+                <Link to={`/dashboard/blog/${tag}`}
                   key={index}
                   className="text-xs text-blue-600 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200">
                   #{tag}
-                </span>
+                </Link>
               ))}
             </div>
                        

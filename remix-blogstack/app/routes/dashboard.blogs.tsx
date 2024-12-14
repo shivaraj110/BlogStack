@@ -1,9 +1,12 @@
+import { getAuth } from "@clerk/remix/ssr.server"
 import { LoaderFunction } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
+import { getBookmarks } from "~/.server/bookmark"
 import { prisma } from "~/.server/db"
 import BlogPost from "~/components/Blog"
 
-export const loader:LoaderFunction = async() => {
+export const loader:LoaderFunction = async(args) => {
+  const {userId} = await getAuth(args)
   try{
     const blogs = await prisma.post.findMany({
       select : {
@@ -23,9 +26,17 @@ export const loader:LoaderFunction = async() => {
         }
       }
     })
+    const bookmarks = await getBookmarks(userId ?? "")
+    let bookMarkPostIds:number[] = [] 
+    bookmarks?.map((b)=>[
+      bookMarkPostIds.push(b.postId)
+    ])
     return {
       status : "success",
-      body : blogs
+      body : {
+        blogs,
+        bookMarkPostIds
+      }
     }
   }
   catch (e){
@@ -58,13 +69,14 @@ interface BlogData{
   tags : string[],
 author : {
 name : string
-},id : string
+},id : number
 }
 
-  const {body}= useLoaderData<typeof loader>()
-  const blogs:BlogData[] = body
 
-if( !body[0] ){
+  const {body}= useLoaderData<typeof loader>()
+  const blogs:BlogData[] = body.blogs
+  const bookmarkIds:number[] = body.bookMarkPostIds
+if( !blogs[0] ){
   return <div className="p-5 flex">
     No blogs added yet. Be the first one to <Link to={"/blog/write"} className="underline px-1 cursor-pointer">add blogs</Link>!
   </div>
@@ -77,7 +89,7 @@ return (
         {blogs.map((b) => (
           <BlogPost
           key={b.id}
-          imgUrl={b.imgUrl ?? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxrqLPeOlGY5Ezx_xkUTLkTmPSsEVSShRMJg&s"}
+          imgUrl={b.imgUrl ?? ""}
           authorImgUrl={b.authorImgUrl}
             authorName={b.author.name || "Anonymous"}
             title={b.title}
@@ -85,7 +97,8 @@ return (
             tags={!b.tags ? ["notags"] : b.tags}
             publishDate={b.publishDate ? b.publishDate : "no trace"}
             likes={b.likes}
-            id={Number(b.id)}
+            id={b.id}
+            bookmarks={ bookmarkIds}
           />
         ))}
       </div>

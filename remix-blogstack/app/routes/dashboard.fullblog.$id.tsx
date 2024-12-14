@@ -1,9 +1,10 @@
 import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node"
 import { Link, useLoaderData } from "@remix-run/react"
-import { Heart, MessageCircle, MessageCirclePlus, Send, SendHorizontal } from "lucide-react"
+import { Bookmark, Heart, MessageCircle, MessageCirclePlus, Save, Send, SendHorizontal } from "lucide-react"
 import { comment } from "postcss"
 import { useState } from "react"
 import { prisma } from "~/.server/db"
+import BookmarkedBlogPost from "~/components/BookMarkBlogs"
 
 export const loader:LoaderFunction = async({params}:LoaderFunctionArgs) => {
 const id = Number(params["id"])
@@ -75,11 +76,17 @@ const blog :{id: number;
   dark:[&::-webkit-scrollbar-thumb]:bg-neutral-400 font-light"> 
 						{blog.content}
 					</div>
-                    <div className="flex space-x-4">
+                    <div className="flex justify-between">
+                        <div className="flex space-x-4">
+
                         {blog.tags.map(tag=>
                         <Link to={`/dashboard/blog/${tag}`} className="p-[5px] text-blue-700 hover:bg-blue-300/60 rounded-sm">
                             #{tag}
                             </Link>)}
+                        </div>
+                        <div className="flex gap-2">
+                           <Bookmark className=  {`text-blue-500 fill-current`}  />
+                        </div>
                     </div>
                     <div className="flex flex-col">
                     <button
@@ -95,7 +102,7 @@ const blog :{id: number;
               onChange={(e)=>{
                 setComment(e.target.value)
               }}
-              className="outline-none mt-2 bg-transparent border-b p-1 w-[400px] placeholder:text-gray-800" placeholder="Add a comment" />
+              className="outline-none mt-2 bg-transparent border-b border-black p-1 w-[400px] placeholder:text-gray-800" placeholder="Add a comment" />
               <SendHorizontal className={` ${comment !== "" ? "flex" : "hidden"} text-gray-800 -translate-x-6 translate-y-2 pt-1 cursor-pointer`} />
               </div>
                     </div>
