@@ -1,23 +1,19 @@
-import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useUser } from "@clerk/remix";
+import { getAuth } from "@clerk/remix/ssr.server";
 import {
-  Bookmark,
-  Heart,
-  MessageCircle,
-  MessageCirclePlus,
-  Save,
-  Send,
-  SendHorizontal,
-} from "lucide-react";
-import { comment } from "postcss";
+  ActionFunction,
+  LoaderFunction,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
+import { Link, useFetcher, useLoaderData } from "@remix-run/react";
+import { Bookmark, Heart, SendHorizontal } from "lucide-react";
 import { useState } from "react";
+import { getBookmarks } from "~/.server/bookmark";
 import { prisma } from "~/.server/db";
-import BookmarkedBlogPost from "~/components/BookMarkBlogs";
 
-export const loader: LoaderFunction = async ({
-  params,
-}: LoaderFunctionArgs) => {
-  const id = Number(params["id"]);
+export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
+  const { userId } = await getAuth(args);
+  const id = Number(args.params["id"]);
   try {
     const blog = await prisma.post.findFirst({
       where: {
@@ -40,9 +36,21 @@ export const loader: LoaderFunction = async ({
         },
       },
     });
+    const comments = await prisma.comment.findMany({
+      where: {
+        postId: blog?.id,
+      },
+    });
+    const bookmarks = await getBookmarks(userId ?? "");
+    let bookMarkPostIds: number[] = [];
+    bookmarks?.map((b) => [bookMarkPostIds.push(b.postId)]);
     return {
       status: "success",
-      body: blog,
+      body: {
+        blog,
+        bookMarkPostIds,
+        comments,
+      },
     };
   } catch (e) {
     return {
@@ -50,6 +58,23 @@ export const loader: LoaderFunction = async ({
     };
   }
 };
+
+export const action: ActionFunction = async (args) => {
+  const { userId } = await getAuth(args);
+  const formData = await args.request.formData();
+  const comment = formData.get("comment")?.toString();
+  const res = await prisma.comment.create({
+    data: {
+      userId: userId ?? "",
+      comment: comment ?? "",
+    },
+  });
+  return {
+    body: res,
+    status: "success",
+  };
+};
+
 const FullBlog = () => {
   const { body } = useLoaderData<typeof loader>();
   const blog: {
@@ -65,28 +90,92 @@ const FullBlog = () => {
     author: {
       name: string | null;
     };
-  } = body;
+    bookmarked: string;
+  } = body.blog;
+  const bookmarks: number[] = body.bookMarkPostIds;
+  const BookMarked = () => {
+    let val = false;
+    bookmarks.map((b) => {
+      if (b === blog.id) {
+        val = true;
+      }
+    });
+    return val;
+  };
+  interface Comment {
+    postId: number | null;
+    comment: string;
+    id: number;
+    userId: string;
+  }
+  const { user } = useUser();
   const [isLiked, setIsLiked] = useState(false);
   const [comment, setComment] = useState("");
+  const blogFirstPart = blog.content.slice(0, 350);
+  const blogSecondPart = blog.content.slice(350, blog.content.length - 1);
+  const fetcher = useFetcher();
+  const [isBookmarked, setIsBookmarked] = useState(BookMarked);
+  const comments: Comment[] = body.comments;
   return (
     <div className="p-8 mx-auto flex">
-      <div className="bg-gray-900/35 rounded-lg p-10 backdrop-brightness-95 border w-full h-[800px] backdrop-blur-sm shadow-2xl">
+      <div className=" p-10  border  w-[80%] h-fit rounded-lg backdrop-blur-sm shadow-2xl">
         <div className="flex gap-5">
           <div className="flex flex-col gap-4">
-            <div className="font-semibold text-xl">{blog.title}</div>
-            <div
-              className="py-10 w-[650px] h-[400px] max-h-[325px] overflow-y-auto
-  [&::-webkit-scrollbar]:w-2
-  [&::-webkit-scrollbar-thumb]:bg-gray-200
-  dark:[&::-webkit-scrollbar-track]:hidden
-  dark:[&::-webkit-scrollbar-thumb]:rounded-xl
-  dark:[&::-webkit-scrollbar-thumb]:h-[15px]
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-400 font-light"
-            >
-              {blog.content}
+            <div className="font-semibold flex justify-between gap-2 text-xl">
+              {blog.title}
+              <div className="flex gap-2">
+                <fetcher.Form
+                  className="flex"
+                  method={isBookmarked ? "DELETE" : "POST"}
+                  action={isBookmarked ? "/removebookmarks" : "/addbookmark"}
+                >
+                  <input type="hidden" name="userId" value={user?.id ?? ""} />
+                  <button
+                    onClick={() => {
+                      setTimeout(() => {
+                        setIsBookmarked(!isBookmarked);
+                      }, 1000);
+                    }}
+                    type="submit"
+                    name="postId"
+                    value={blog.id}
+                    className={`${
+                      isBookmarked ? "text-blue-500" : "hover:text-blue-500"
+                    } transition-colors duration-200`}
+                  >
+                    <Bookmark
+                      className={`h-5 w-5 ${
+                        isBookmarked ? "fill-current" : "fill-none"
+                      }`}
+                    />
+                  </button>
+                </fetcher.Form>
+                <button
+                  className={`flex items-center space-x-1 ${
+                    isLiked ? "text-red-500" : "hover:text-red-500"
+                  } transition-colors duration-200`}
+                  onClick={() => setIsLiked(!isLiked)}
+                >
+                  <Heart
+                    className={`size-4 ${isLiked ? "fill-current" : ""}`}
+                  />
+                  <span className="font-light">
+                    {!blog.likes ? 6 + "M" : blog.likes}
+                  </span>
+                </button>
+              </div>
             </div>
+
+            <div className="py-5">{blogFirstPart}</div>
+            <img
+              src={blog.imgUrl}
+              alt="blog image "
+              className="rounded-lg object-scale-down size-full "
+            />
+            <div className="py-5">{blogSecondPart}</div>
+
             <div className="flex justify-between">
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 size-fit">
                 {blog.tags.map((tag) => (
                   <Link
                     to={`/dashboard/blog/${tag}`}
@@ -96,68 +185,61 @@ const FullBlog = () => {
                   </Link>
                 ))}
               </div>
-              <div className="flex gap-2">
-                <Bookmark className={`text-blue-500 fill-current`} />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <button
-                className={`flex items-center space-x-2 ${
-                  isLiked ? "text-red-500" : "hover:text-red-500"
-                } transition-colors duration-200`}
-                onClick={() => setIsLiked(!isLiked)}
-              >
-                <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
-                <span>{blog.likes} Likes</span>
-              </button>
-              <div className="flex">
-                <input
-                  type="text"
-                  onChange={(e) => {
-                    setComment(e.target.value);
-                  }}
-                  className="outline-none mt-2 bg-transparent border-b border-black p-1 w-[400px] placeholder:text-gray-800"
-                  placeholder="Add a comment"
-                />
-                <SendHorizontal
-                  className={` ${
-                    comment !== "" ? "flex" : "hidden"
-                  } text-gray-800 -translate-x-6 translate-y-2 pt-1 cursor-pointer`}
-                />
-              </div>
-            </div>
-          </div>
-          <div className=" flex flex-col mx-auto justify-between">
-            <div className="border rounded-lg my-20 w-[460px] h-[305px] object-scale-down">
-              <img src={blog.imgUrl} alt="blog image" className="size-full" />
-            </div>
-            <div className="flex border justify-between  rounded-lg cursor-pointer bg-white/30 p-5 space-y-2 text-black items-center">
-              <div className="mx-2">
+              <div className="flex border justify-between  rounded-lg cursor-pointer bg-white/20 backdrop-blur-sm p-5 space-y-2 text-black items-center">
+                <div className="mx-2">
+                  <div className="">
+                    {" - "}
+                    {blog.author.name ?? "Anonymous"}
+                  </div>
+                  <div className="text-gray-800 mx-2 ">
+                    {"CEO" + " | BlogStack"}
+                  </div>
+                  <div className="text-gray-800 mx-2 ">
+                    {"Joined on Jan 6 2023"}
+                  </div>
+                </div>
                 <div className="">
-                  {" - "}
-                  {blog.author.name ?? "Anonymous"}
+                  <img
+                    src={blog.authorImgUrl}
+                    alt="authorImage"
+                    className="rounded-md size-16 border"
+                  />
                 </div>
-                <div className="text-gray-800 mx-2 ">
-                  {"CEO" + " | BlogStack"}
-                </div>
-                <div className="text-gray-800 mx-2 ">
-                  {"Joined on Jan 6 2023"}
-                </div>
-              </div>
-              <div className="">
-                <img
-                  src={blog.authorImgUrl}
-                  alt="authorImage"
-                  className="rounded-md size-16 border"
-                />
               </div>
             </div>
           </div>
+          <div className=" flex flex-col mx-auto justify-between"></div>
+        </div>
+      </div>
+      <div className="flex w-[500px] backdrop-blur-sm bg-white/20 rounded-lg shadow-lg h-fit p-5 mx-5 flex-col">
+        <div className="flex border p-2 rounded-lg">
+          <input
+            required
+            value={comment}
+            type="text"
+            onChange={(e) => {
+              setComment(e.target.value);
+            }}
+            className="outline-none mt-2 bg-transparent border-black p-1 w-[400px] placeholder:text-gray-800"
+            placeholder="Add a comment"
+          />
+          <input type="hidden" name="comment" value={comment} />
+          <button
+            type="submit"
+            className=" text-gray-800 -translate-x-6 translate-y-2 pt-1 cursor-pointer"
+          >
+            <SendHorizontal />
+          </button>
+        </div>
+        <div className="p-2">
+          {comments.map((c) => (
+            <div className={` ${c ? "flex" : "hidden"}  p-2 rounded-lg`}>
+              {c.comment}
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
 export default FullBlog;
-
-//370*245

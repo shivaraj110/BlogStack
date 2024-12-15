@@ -57,7 +57,7 @@ function MyBlogPost({
           </div>
         </div>
         <div className="md:pl-10">
-          <Link to={`/blog/${id}`}>
+          <Link to={`/dashboard/fullblog/${id}`}>
             <h1 className="text-2xl font-bold  mb-2 hover:text-blue-600  cursor-pointer transition-colors duration-200">
               {title}
             </h1>
