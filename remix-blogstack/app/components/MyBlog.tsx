@@ -1,7 +1,8 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Bookmark, Heart, MessageCircle, Share2, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFetcher } from "@remix-run/react";
+import { useUser } from "@clerk/remix";
 
 export interface BlogData {
   authorName: string;
@@ -11,8 +12,9 @@ export interface BlogData {
   tags: string[];
   likes?: number;
   id: number;
-  imgUrl : string
-  authorImgUrl : string
+  imgUrl: string;
+  authorImgUrl: string;
+  bookmarks: number[];
 }
 
 function MyBlogPost({
@@ -24,13 +26,22 @@ function MyBlogPost({
   likes,
   id,
   authorImgUrl,
-  imgUrl
+  imgUrl,
+  bookmarks,
 }: BlogData) {
   const [isLiked, setIsLiked] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(false);
-  const fetcher = useFetcher()
-
-
+  const fetcher = useFetcher();
+  const { user } = useUser();
+  const BookMarked = () => {
+    let val = false;
+    bookmarks.map((b) => {
+      if (b === id) {
+        val = true;
+      }
+    });
+    return val;
+  };
+  const [isBookmarked, setIsBookmarked] = useState(BookMarked);
   return (
     <div className=" bg-gray-900/35 backdrop-brightness-95 text-slate-900 backdrop-blur-sm rounded-md border border-gray-200 overflow-hidden my-4">
       <div className="p-5">
@@ -41,9 +52,7 @@ function MyBlogPost({
             alt={authorName}
           />
           <div>
-            <h2 className="text-base font-medium ">
-              {authorName}
-            </h2>
+            <h2 className="text-base font-medium ">{authorName}</h2>
             <p className="text-xs">{publishDate}</p>
           </div>
         </div>
@@ -54,24 +63,28 @@ function MyBlogPost({
             </h1>
           </Link>
           <div className="text-sm grid grid-cols-3 mb-4">
-<div className="col-span-2">
-            {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
-</div>
-	<div className="mx-auto">
-<img src={imgUrl} alt="BlogImage" className="cursor-pointer object-scale-down size-full border rounded-lg col-span-1" />
-	</div>
+            <div className="col-span-2">
+              {content.slice(0, 400) + (content.length < 400 ? "" : "...")}
+            </div>
+            <div className="mx-auto">
+              <img
+                src={imgUrl}
+                alt="BlogImage"
+                className="cursor-pointer object-scale-down size-full border rounded-lg col-span-1"
+              />
+            </div>
           </div>
           <div className="flex flex-wrap justify-between mb-4">
             <div className="flex flex-wrap gap-2">
               {tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="text-xs text-blue-600 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200">
+                  className="text-xs text-blue-600 rounded px-2 py-1 mb-2 hover:bg-blue-200  transition-colors duration-200"
+                >
                   #{tag}
                 </span>
               ))}
             </div>
-                       
           </div>
           <div className="flex sm:flex-row flex-col items-center justify-between text-sm  ">
             <div className="flex items-center space-x-4">
@@ -79,7 +92,8 @@ function MyBlogPost({
                 className={`flex items-center space-x-2 ${
                   isLiked ? "text-red-500" : "hover:text-red-500"
                 } transition-colors duration-200`}
-                onClick={() => setIsLiked(!isLiked)}>
+                onClick={() => setIsLiked(!isLiked)}
+              >
                 <Heart className={`h-5 w-5 ${isLiked ? "fill-current" : ""}`} />
                 <span>{likes} Reactions</span>
               </button>
@@ -92,31 +106,41 @@ function MyBlogPost({
               <span className="text-xs text-blue-600  rounded-full px-2 py-1">
                 {Math.floor(content.split(" ").length / 60) + " mins read"}
               </span>
-              <fetcher.Form method="delete" action= {"/deleteBlog"} >
-              <button className="text-gray-900"
-                type="submit"  
-                name="id"        
-                value={id}
-           >
-                <Trash2/>
-              </button>
+              <fetcher.Form method="delete" action={"/deleteBlog"}>
+                <button
+                  className="text-gray-900"
+                  type="submit"
+                  name="id"
+                  value={id}
+                >
+                  <Trash2 />
+                </button>
               </fetcher.Form>
-              <button
-                className={`${
-                  isBookmarked ? "text-blue-500" : "hover:text-blue-500"
-                } transition-colors duration-200`}
-    >
-                <Bookmark
-		 onClick={()=>{
-      setTimeout(()=>{
-        setIsBookmarked(!isBookmarked)
-      },1000)
-     }}
-                  className={`h-5 w-5 ${
-                    isBookmarked ? "fill-current" : "fill-none"
-                  }`}
-                />
-              </button>
+              <fetcher.Form
+                method={isBookmarked ? "DELETE" : "POST"}
+                action={isBookmarked ? "/removebookmarks" : "/addbookmark"}
+              >
+                <input type="hidden" name="userId" value={user?.id ?? ""} />
+                <button
+                  onClick={() => {
+                    setTimeout(() => {
+                      setIsBookmarked(!isBookmarked);
+                    }, 1000);
+                  }}
+                  type="submit"
+                  name="postId"
+                  value={id}
+                  className={`${
+                    isBookmarked ? "text-blue-500" : "hover:text-blue-500"
+                  } transition-colors duration-200`}
+                >
+                  <Bookmark
+                    className={`h-5 w-5 ${
+                      isBookmarked ? "fill-current" : "fill-none"
+                    }`}
+                  />
+                </button>
+              </fetcher.Form>
               <button className="hover:text-green-500 transition-colors duration-200">
                 <Share2 className="h-5 w-5" />
               </button>

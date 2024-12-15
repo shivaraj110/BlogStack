@@ -31,20 +31,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
-        <Meta />
-        <Links />
-      </head>
-      <body className="bg-[url('/bg.jpg')] bg-cover bg-no-repeat"> 
+<Meta />
+<Links />
+</head>
+<body className="bg-[url('/bg.jpg')] bg-cover bg-no-repeat"> 
 {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
-  );
+<ScrollRestoration />
+<Scripts />
+</body>
+</html>
+);
 }
 
 function App() {
-  return <Outlet />;
+return <Outlet />;
 }
 
 export default ClerkApp(App);
