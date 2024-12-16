@@ -1,10 +1,6 @@
 import { useUser } from "@clerk/remix";
 import { getAuth } from "@clerk/remix/ssr.server";
-import {
-  ActionFunction,
-  LoaderFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import { LoaderFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { Link, useFetcher, useLoaderData } from "@remix-run/react";
 import { Bookmark, Heart, SendHorizontal } from "lucide-react";
 import { useState } from "react";
@@ -34,11 +30,23 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
             name: true,
           },
         },
-      },
-    });
-    const comments = await prisma.comment.findMany({
-      where: {
-        postId: blog?.id,
+        comments: {
+          where: {
+            postId: id,
+          },
+          select: {
+            comment: true,
+            commentedAt: true,
+            id: true,
+            user: {
+              select: {
+                name: true,
+                pfpUrl: true,
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
     const bookmarks = await getBookmarks(userId ?? "");
@@ -49,7 +57,6 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
       body: {
         blog,
         bookMarkPostIds,
-        comments,
       },
     };
   } catch (e) {
@@ -57,22 +64,6 @@ export const loader: LoaderFunction = async (args: LoaderFunctionArgs) => {
       status: "failure",
     };
   }
-};
-
-export const action: ActionFunction = async (args) => {
-  const { userId } = await getAuth(args);
-  const formData = await args.request.formData();
-  const comment = formData.get("comment")?.toString();
-  const res = await prisma.comment.create({
-    data: {
-      userId: userId ?? "",
-      comment: comment ?? "",
-    },
-  });
-  return {
-    body: res,
-    status: "success",
-  };
 };
 
 const FullBlog = () => {
@@ -88,9 +79,18 @@ const FullBlog = () => {
     likes: number;
     imgUrl: string;
     author: {
-      name: string | null;
+      name: string;
     };
-    bookmarked: string;
+    comments: {
+      comment: string;
+      commentedAt: Date;
+      id: number;
+      user: {
+        name: string;
+        pfpUrl: string;
+        id: number;
+      };
+    }[];
   } = body.blog;
   const bookmarks: number[] = body.bookMarkPostIds;
   const BookMarked = () => {
@@ -102,12 +102,6 @@ const FullBlog = () => {
     });
     return val;
   };
-  interface Comment {
-    postId: number | null;
-    comment: string;
-    id: number;
-    userId: string;
-  }
   const { user } = useUser();
   const [isLiked, setIsLiked] = useState(false);
   const [comment, setComment] = useState("");
@@ -115,7 +109,8 @@ const FullBlog = () => {
   const blogSecondPart = blog.content.slice(350, blog.content.length - 1);
   const fetcher = useFetcher();
   const [isBookmarked, setIsBookmarked] = useState(BookMarked);
-  const comments: Comment[] = body.comments;
+  console.log(JSON.stringify(blog));
+
   return (
     <div className="p-8 mx-auto flex">
       <div className=" p-10  border  w-[80%] h-fit rounded-lg backdrop-blur-sm shadow-2xl">
@@ -223,16 +218,21 @@ const FullBlog = () => {
             className="outline-none mt-2 bg-transparent border-black p-1 w-[400px] placeholder:text-gray-800"
             placeholder="Add a comment"
           />
-          <input type="hidden" name="comment" value={comment} />
-          <button
-            type="submit"
-            className=" text-gray-800 -translate-x-6 translate-y-2 pt-1 cursor-pointer"
+          <fetcher.Form
+            method="POST"
+            action={comment !== "" ? "/api/pushcomment" : ""}
           >
-            <SendHorizontal />
-          </button>
+            <input type="hidden" name="comment" value={comment} />
+            <button
+              type="submit"
+              className=" text-gray-800 -translate-x-6 translate-y-2 pt-1 cursor-pointer"
+            >
+              <SendHorizontal />
+            </button>
+          </fetcher.Form>
         </div>
         <div className="p-2">
-          {comments.map((c) => (
+          {blog.comments.map((c) => (
             <div className={` ${c ? "flex" : "hidden"}  p-2 rounded-lg`}>
               {c.comment}
             </div>

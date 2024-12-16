@@ -59,18 +59,19 @@ model Bookmark {
   user      User     @relation(fields: [userId], references: [identifier], onDelete: Cascade)
   userId    String
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    Int      @unique
+  postId    Int
   createdAt DateTime @default(now())
 }
 
 model Comment {
-  id      Int       @id @default(autoincrement())
-  user    User      @relation(fields: [userId], references: [identifier])
-  userId  String
-  comment String
-  replies Replies[]
-  Post    Post?     @relation(fields: [postId], references: [id])
-  postId  Int?
+  id          Int       @id @default(autoincrement())
+  user        User      @relation(fields: [userId], references: [identifier])
+  userId      String
+  comment     String
+  replies     Replies[]
+  Post        Post?     @relation(fields: [postId], references: [id])
+  postId      Int?
+  commentedAt DateTime  @default(now())
 }
 
 model Replies {
